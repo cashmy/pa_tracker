@@ -14,7 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Image from '../../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
-import ServiceLayer from '../../Services/serviceLayer.js';
+import ServiceLayer from '../../services/ServiceLayer.js';
 import jwtDecode from 'jwt-decode';
 
 const useStyles = makeStyles((theme) => ({
