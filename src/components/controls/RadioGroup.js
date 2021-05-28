@@ -9,13 +9,17 @@ export default function RadioGroup(props) {
             <FormControl>
                 <FormLabel>{label}</FormLabel>
                     <MuiRadioGroup row
-                        name = {name}
-                        value = {value}
-                        onChange = {onChange}
+                        name={name}
+                        value={value}
+                        onChange={onChange}
                         {
                             ... items.map(
-                                (item, index) => {
-                                    <FormControlLabel value={item.id} control = {<Radio />} label={item.title} />
+                                (item) => {
+                                    <FormControlLabel 
+                                        key={item.id} 
+                                        value={item.id} 
+                                        control={<Radio />} 
+                                        label={item.title} />
                                 }
                             )
                         }
