@@ -5,6 +5,11 @@ import { FormControl, FormControlLabel, FormHelperText, Checkbox as MuiCheckBox 
 const Select = (props) => {
     const { name, label, value, error=null, onChange, ...options } = props
 
+    const convertToDefEventParam = (name, value) => ({
+        target: {
+            name, value
+        }
+    })
 
     return (
         <FormControl variant='outlined' fullWidth
@@ -16,7 +21,7 @@ const Select = (props) => {
                     name = {name}
                     color = "primary" 
                     checked = {value}
-                    onChange = {onChange}
+                    onChange = {e => onChange(convertToDefEventParam(name, e.target.checked))}
                     {...options}
                 />}
                 label={label}
