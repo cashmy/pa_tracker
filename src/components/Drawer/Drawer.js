@@ -26,9 +26,11 @@ import { mainListItems, secondaryListItems } from './listItems';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {'Copyright ©CMC Services, Inc. '}
+
+      {/* Add Label text and update link for Portfolio website */}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -131,6 +133,8 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <CssBaseline />
+
+      {/* Appbar */}
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
@@ -152,6 +156,8 @@ export default function Dashboard() {
           </IconButton>
         </Toolbar>
       </AppBar>
+
+      {/* Sidebar Navigation */}
       <Drawer
         variant="permanent"
         classes={{
@@ -169,6 +175,8 @@ export default function Dashboard() {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
+
+      {/* Main Display */}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -176,25 +184,31 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
+                item 1
                 {/* <Chart /> */}
               </Paper>
             </Grid>
             {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
+                card item 1
                 {/* <Deposits /> */}
               </Paper>
             </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
+                table item 1
                 {/* <Orders /> */}
               </Paper>
             </Grid>
           </Grid>
+          
+          {/* Optional Copyright - [May move to Footer] */}
           <Box pt={4}>
             <Copyright />
           </Box>
+
         </Container>
       </main>
     </div>
