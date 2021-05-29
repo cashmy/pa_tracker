@@ -2,10 +2,6 @@ import axios from 'axios';
 
 class ServiceLayer {
 
-    // Example to get Token
-    // jwt = localStorage.getItem('token')
-    //return http.post('authentication/login',{headers: {Authorization: 'Bearer ' + jwt}}, data);
-
     getToken(){
         const jwt = localStorage.getItem('token');
         if(jwt){
@@ -18,22 +14,27 @@ class ServiceLayer {
 
     // ***** PATIENT End points *****
     getAllPatients(){
+        const jwt = localStorage.getItem('token')
         return axios.get('https://localhost:44394/api/patient/', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     getPatient(id){
+        const jwt = localStorage.getItem('token')
         return axios.get(`https://localhost:44394/api/patient/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    addPatient(){
+    addPatient(data){
+        const jwt = localStorage.getItem('token')
         return axios.post('https://localhost:44394/api/patient/', data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
-    updatePatient(id){
+    updatePatient(id, data){
+        const jwt = localStorage.getItem('token')
         return axios.put(`https://localhost:44394/api/patient/${id}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
     deletePatient(id){
+        const jwt = localStorage.getItem('token')
         return axios.delete(`https://localhost:44394/api/patient/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
@@ -49,6 +50,7 @@ class ServiceLayer {
 
     
     getUserProfile(){
+        const jwt = localStorage.getItem('token')
         return axios.get('https://localhost:44394/api/user/profile', {headers: {Authorization: 'Bearer ' + jwt}});
     }
     
@@ -58,12 +60,14 @@ class ServiceLayer {
     }
 
     // Admin use only
-    addUser(){
+    addUser(data){
+        const jwt = localStorage.getItem('token')
         return axios.post('https://localhost:44394/api/user', data, {headers: {Authorization: 'Bearer ' + jwt}})
     }
 
     // Admin use only
     getAllUsers(){
+        const jwt = localStorage.getItem('token')
         return axios.get('https://localhost:44394/api/user/', {headers: {Authorization: 'Bearer ' + jwt}});
     }
 
@@ -74,3 +78,5 @@ class ServiceLayer {
     }
 
 }
+
+export default new ServiceLayer();
