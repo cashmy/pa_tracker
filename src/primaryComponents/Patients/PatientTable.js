@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 import { makeStyles } from '@material-ui/core';
-import Controls from '../../components/controls/Controls';
-import IconButton from '@material-ui/core/IconButton'
+import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -74,7 +73,7 @@ const columns  = [
   { field: 'actions', 
     headerName: 'Actions', 
     width: 150, 
-    renderCell: (params: GridCellParams) => (
+    renderCell: (params) => (
       <div>
       <IconButton
         aria-label="delete"
