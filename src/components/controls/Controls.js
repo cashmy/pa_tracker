@@ -4,6 +4,7 @@ import Input from './Input'
 import DatePicker from './DatePicker'
 import RadioGroup from './RadioGroup'
 import Select from './Select'
+import Switch from './Switch'
 
 const Controls = {
     Button,
@@ -12,6 +13,7 @@ const Controls = {
     Input,
     RadioGroup,
     Select,
+    Switch,
 }
 
 export default Controls;
