@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, FormLabel, RadioGroup as MuiRadioGroup } from '@material-ui/core';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup as MuiRadioGroup } from '@material-ui/core';
 
 export default function RadioGroup(props) {
 
@@ -14,13 +14,14 @@ export default function RadioGroup(props) {
                         onChange={onChange}
                         {
                             ... items.map(
-                                (item) => {
+                                (item) =>  (
                                     <FormControlLabel 
                                         key={item.id} 
                                         value={item.id} 
                                         control={<Radio />} 
-                                        label={item.title} />
-                                }
+                                        label={item.title} 
+                                    />
+                                )
                             )
                         }
                     />
