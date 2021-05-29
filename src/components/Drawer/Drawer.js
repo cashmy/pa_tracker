@@ -25,14 +25,10 @@ import PatientTable from '../../primaryComponents/Patients/PatientTable';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright ©CMC Services, Inc. '}
-
-      {/* Add Label text and update link for Portfolio website */}
+      {'Copyright © '}{new Date().getFullYear()}{' CMC Services, Inc. '}
       <Link color="inherit" href="https://material-ui.com/">
-        
+        www.Website.edu
       </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
     </Typography>
   );
 }
@@ -178,6 +174,8 @@ export default function Dashboard() {
       {/* Main Display */}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+
+        {/* Add views (... sans login ?) */}
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
