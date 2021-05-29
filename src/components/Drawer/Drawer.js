@@ -19,6 +19,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
+import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.svg'
+import PageHeader from '../PageHeader/PageHeader';
 
 import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
 
@@ -179,23 +181,30 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            {/* <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
                 item 1
-                {/* <Chart /> */}
+                <Chart /> 
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
+            {/* <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 card item 1
-                {/* <Deposits /> */}
+                <Deposits />
               </Paper>
+            </Grid> */}
+
+            {/* Page Header */}
+            <Grid item xs={12}>
+              <PageHeader 
+                title="Patient Listing"
+                subtitle="Sort, filter, add or edit all patients"
+                icon={<PatientIcon />}
+              />      
             </Grid>
-            {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                table item 1
                 <PatientTable />
                 {/* <Orders /> */}
               </Paper>
