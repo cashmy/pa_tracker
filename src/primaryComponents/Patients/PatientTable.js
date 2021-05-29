@@ -1,45 +1,114 @@
 import * as React from 'react';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
+import { makeStyles } from '@material-ui/core';
+import Controls from '../../components/controls/Controls';
+import IconButton from '@material-ui/core/IconButton'
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-const columns = [
-  { field: 'id', headerName: 'ID', width: 90 },
-  { field: 'firstName', headerName: 'First name', width: 150 },
-  { field: 'lastName', headerName: 'Last name', width: 150 },
-  {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
-  },
-  {
-    field: 'fullName',
+const useStyles = makeStyles((theme) => ({
+  toolbar: {
+      justifyContent: 'flex-end',
+    }
+  }
+))
+
+const handleEditRow = (id) => {
+  alert(`Editing Row for : ${id}`)
+}
+
+const handleDeleteRow = (id) => {
+  alert(`Deleting Row for : ${id}`)
+}
+
+function getFullName(params) {
+  return `${params.getValue(params.id, 'PatientLastName') || ''}, ${
+    params.getValue(params.id, 'PatientFirstName') || ''
+  }`;
+}
+
+const columns  = [
+  { field: 'id', headerName: 'ID', width: 90, hide: true},
+  { field: 'PatientLastName', headerName: 'Last name', width: 150, hide: true },
+  { field: 'PatientFirstName', headerName: 'First name', width: 150, hide: true },
+  { field: 'fullName',
     headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${
-        params.getValue(params.id, 'lastName') || ''
-      }`,
+    width: 150,
+    valueGetter: getFullName,
+    sortComparator: (v1, v2) => v1.toString().localeCompare(v2.toString())
   },
+  { field: 'PatientDOB', headerName: 'DOB', type: 'date', width: 150},
+  { field: 'PatientClass', headerName: 'Class', width: 120 },
+  { field: 'PatientHaveIEP', 
+    headerName: 'IEP', 
+    valueGetter: (params) => {
+      if (params.row.PatientHaveIEP === true) {
+        return 'Y';
+      } else if (params.row.PatientHaveIEP === false) {
+        return 'N';
+      }
+    }
+  },
+  { field: 'PatientInABA', 
+    headerName: 'ABA', 
+    width: 105,
+    valueGetter: (params) => {
+      if (params.row.PatientInABA === true) {
+        return 'Y';
+      } else if (params.row.PatientInABA === false) {
+        return 'N';
+      }
+    } 
+  },
+  { field: 'PatientInactive', 
+    headerName: 'InActv', 
+    width: 150,
+    valueGetter: (params) => {
+      if (params.row.PatientInactive === true) {
+        return 'Y';
+      } else if (params.row.PatientInactive === false) {
+        return 'N';
+      }
+    },
+  },
+  { field: 'actions', 
+    headerName: 'Actions', 
+    width: 150, 
+    renderCell: (params: GridCellParams) => (
+      <div>
+      <IconButton
+        aria-label="delete"
+        onClick={() => handleEditRow(params.row.id)}
+        color="primary"
+      >
+        <EditIcon />
+      </IconButton>
+      <IconButton
+        aria-label="delete"
+        onClick={() => handleDeleteRow(params.row.id)}
+        color="secondary"
+      >
+        <DeleteIcon />
+    </IconButton>
+    </div>
+
+    ),
+  }
 ];
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, PatientLastName: 'Quest', PatientFirstName: 'Johnny', PatientDOB: 'July 15, 1961', PatientHaveIEP: false, PatientInABA: true, PatientClass: 'CO', PatientInactive: true},
+  { id: 2, PatientLastName: 'Quest', PatientFirstName: 'Hadji', PatientDOB: 'September 20, 1962', PatientHaveIEP: false, PatientInABA: false, PatientClass: 'CO', PatientInactive: false},
 ];
 
 export default function DataGridDemo() {
+  const classes = useStyles();
   return (
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid 
+        classes={{
+          toolbar: classes.toolbar,
+        }}
         rows={rows} 
         columns={columns} 
         pageSize={5} 
