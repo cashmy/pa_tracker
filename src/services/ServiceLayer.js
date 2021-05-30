@@ -19,6 +19,32 @@ class ServiceLayer {
         { id: 'SP', title: 'Self-Pay' }
     ])
 
+        // ***** CLINC End points *****
+        getAllClinics(){
+            const jwt = localStorage.getItem('token')
+            return axios.get('https://localhost:44394/api/clinic/', {headers: {Authorization: 'Bearer ' + jwt}});
+        }
+    
+        getClinic(id){
+            const jwt = localStorage.getItem('token')
+            return axios.get(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+        }
+    
+        addClinic(data){
+            const jwt = localStorage.getItem('token')
+            return axios.post('https://localhost:44394/api/clinic/', data, {headers: {Authorization: 'Bearer ' + jwt}});
+        }
+    
+        updateClinic(id, data){
+            const jwt = localStorage.getItem('token')
+            return axios.put(`https://localhost:44394/api/clinic/${id}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
+        }
+    
+        deleteClinic(id){
+            const jwt = localStorage.getItem('token')
+            return axios.delete(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+        }
+
     // ***** PATIENT End points *****
     getAllPatients(){
         const jwt = localStorage.getItem('token')
