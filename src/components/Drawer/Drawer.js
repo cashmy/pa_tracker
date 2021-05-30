@@ -19,10 +19,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.svg'
-import PageHeader from '../PageHeader/PageHeader';
+// import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.svg'
+// import PageHeader from '../PageHeader/PageHeader';
 
-import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
+// import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
+// import PatientForm from '../../primaryComponents/Patients/PatientForm'; 
+import ClinicTable from '../../primaryComponents/Clinics/ClinicTable'; 
+// import ClinicForm from '../../primaryComponents/Clinics/ClinicForm'; 
+
 
 function Copyright() {
   return (
@@ -125,7 +129,7 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -196,17 +200,19 @@ export default function Dashboard() {
             </Grid> */}
 
             {/* Page Header */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <PageHeader 
                 title="Patient Listing"
                 subtitle="Sort, filter, add or edit all patients"
                 icon={<PatientIcon />}
               />      
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <PatientTable />
-                {/* <Orders /> */}
+                {/* <ClinicForm /> */}
+                <ClinicTable />
+                {/* <PatientForm /> */}
+                {/* <PatientTable /> */}
               </Paper>
             </Grid>
           </Grid>
