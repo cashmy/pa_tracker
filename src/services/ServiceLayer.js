@@ -11,6 +11,13 @@ class ServiceLayer {
             window.location.href="/login"
         }
     }
+    // Financial Class - Used here in case of refactoring into a separate model in the database.
+    // for now it will simply be a "standard"
+    getAllFinancialClasses = () => ([
+        { id: 'CO', title: 'Commercial' },
+        { id: 'MD', title: 'Medicaid' },
+        { id: 'SP', title: 'Self-Pay' }
+    ])
 
     // ***** PATIENT End points *****
     getAllPatients(){
