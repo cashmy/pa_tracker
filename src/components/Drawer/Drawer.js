@@ -25,7 +25,7 @@ import { mainListItems, secondaryListItems } from './listItems';
 // import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
 // import PatientForm from '../../primaryComponents/Patients/PatientForm'; 
 import ClinicTable from '../../primaryComponents/Clinics/ClinicTable'; 
-// import ClinicForm from '../../primaryComponents/Clinics/ClinicForm'; 
+
 
 
 function Copyright() {
