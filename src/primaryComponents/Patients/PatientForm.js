@@ -67,12 +67,6 @@ export default function PatientForm() {
         event.preventDefault();
         if(validate())
             alert("All good")
-        else
-        {
-            alert('Something went wrong')
-            console.log("Errors: ", errors)
-            console.log("Validate: ", validate())
-        }
     };
 
     // // TODO: Swap this out with Redux Actions/Reducers
