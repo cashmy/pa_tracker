@@ -7,7 +7,7 @@ import {
 
 export default function DatePicker(props) {
     
-    const { name, label, value, onChange } = props;
+    const { name, label, value, error=null, onChange } = props;
 
      // Converts the "Date" value to the Default Event parameter alleviating an error messag
     const convertToDefEventParam = (name, value) => ({
@@ -27,6 +27,7 @@ export default function DatePicker(props) {
                 name={name}
                 value={value}
                 onChange={date => onChange(convertToDefEventParam(name, date))}
+                {...(error && {error:true, helperText:error})}
             />
         </MuiPickersUtilsProvider>
     )

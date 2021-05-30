@@ -1,64 +1,181 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { Grid } from '@material-ui/core';
 import Controls from '../../components/controls/Controls';
+import { useForm, Form } from '../../components/useForm';
+import ServiceLayer from '../../services/ServiceLayer';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& .MuiFormControl-root': {
-            width: '80%',
-            margin: theme.spacing(1),
-        }
-    }
-}))
+
+const genderItems = [
+    {id:'male', title:'Male'},
+    {id:'female', title:'Female'},
+    {id:'other', title:'Other'} ,
+]
 
 const initialFValues = {
     patientId: 0,
     patientFirstName : '',
     patientLastName : '',
-    patientDOB: '',
+    patientDOB: null,
+    patientGender: '',
+    patientClass: '',
     patientHaveIEP: false,
     patientInABA: false,
-    patientClass: '',
     patientNotes: '',
     patientInactive: false
 }
 
 export default function PatientForm() {
-
-    const [values, setValues ] = useState(initialFValues);
-    const classes = useStyles;
     
-    const handleInputChange = e => {
-        const { name, value } = e.target
-        setValues({
-            ...values,
-            [name]: value
+    // Validation function (to be passed as a callback)
+    const validate = (fieldValues = values) => {
+        let temp = {...errors};
+        if('patientFirstName' in fieldValues) 
+            temp.patientFirstName = fieldValues.patientFirstName ? "" : "This field is required." 
+        if('patientLastName' in fieldValues)
+            temp.patientLastName = fieldValues.patientLastName ? "" : "This field is required."
+        if('patientDOB' in fieldValues)
+            temp.patientDOB = fieldValues.patientDOB ? "" : "This field is required."
+        if('patientClass' in fieldValues)
+            temp.patientClass = fieldValues.patientClass ? "" : "This field is required."
+        if('patientGender' in fieldValues)
+            temp.patientGender = fieldValues.patientGender ? "" : "This field is required."
+        // temp.moble = values.mobile.length > 9 ? "" : "Minimum 10 numbers required"
+        // temp.email = (/$^|.+@.+..+/).test(values.email) ? "" : "Email is not a valid format"
+        setErrors({
+            ...temp
         })
+    
+        // Check that every item in the array has a blank result (no errors) else return false.
+        if(fieldValues === values)
+        return Object.values(temp).every(x => x === "")
     }
+
+    // const [values, setValues ] = useState(initialFValues);
+    // const classes = useStyles;
+
+    const {
+        values,
+        // setValues,
+        errors,
+        setErrors,
+        handleInputChange,
+        resetForm,
+    } = useForm(initialFValues);
+    
+    // SaveSubmit Callback handler - event driven
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if(validate())
+            alert("All good")
+        else
+        {
+            alert('Something went wrong')
+            console.log("Errors: ", errors)
+            console.log("Validate: ", validate())
+        }
+    };
+
+    // // TODO: Swap this out with Redux Actions/Reducers
+    // async function updatePatients(e){
+    //     try{
+    //         const response = await ServiceLayer.updatePatient(values);
+    //         setPatients(response.data);
+    //         resetForm()
+    //     }
+    //     catch(e){
+    //         console.log('API call unsuccessful', e)
+    //     }
+    // }
 
     useEffect(() => {
     },[values])
 
     return(
-        <form>
-            <Grid container className={classes.root}>
+        <Form>
+            <Grid container alignItems="flex-start" spacing={2}>
                 <Grid item xs={6}>
                     <Controls.Input
                         name="patientFirstName" 
                         label="FirstName"
                         value={values.patientFirstName}
                         onChange={handleInputChange}
+                        error={errors.patientFirstName}
                     />
                     <Controls.Input
                         name="patientLastName" 
                         label="LastName"
                         value={values.patientLastName}
+                        onChange={handleInputChange}
+                        error={errors.patientLastName}
                     />
+                    <Controls.DatePicker 
+                        name="patientDOB"
+                        label="Date of Birth"
+                        value={values.patientDOB}
+                        onChange={handleInputChange}
+                        error={errors.patientDOB}
+                    />
+                    <Controls.RadioGroup
+                        name="patientGender"
+                        label="Gender"
+                        value={values.patientGender}
+                        onChange={handleInputChange}
+                        items={genderItems}
+                        error={errors.patientGender}
+                   />
                 </Grid>
                 <Grid item xs={6}>
-
+                    <Controls.Select
+                        name="patientClass"
+                        label="Financial Class"
+                        value={values.patientClass}
+                        onChange={handleInputChange}
+                        options = {ServiceLayer.getAllFinancialClasses() }
+                        error={errors.patientClass}
+                    />
+                    <Controls.Checkbox 
+                        name="patientHaveIEP"
+                        label="Has an IEP"
+                        value={values.patientHaveIEP}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Checkbox 
+                        name="patientInABA"
+                        label="In ABA"
+                        value={values.patientInIEP}
+                        onChange={handleInputChange}
+                    />
+                    <Controls.Checkbox 
+                        name="patientInactive"
+                        label="InActive"
+                        value={values.patientInactive}
+                        onChange={handleInputChange}
+                        color="secondary"
+                    />
+                </Grid>
+                <Grid item xs={12} styles={{display: "flex"}}>
+                    <Controls.Input 
+                        name="patientNotes"
+                        label="Notes"
+                        value={values.patientNotes}
+                        onChange={handleInputChange}
+                        multiline
+                        rowsMax={4}
+                    />
+                    <div styles={{display: "flex"}}>
+                        <Controls.Button 
+                            type="submit"
+                            text="Submit"
+                            onClick={handleSubmit}
+                        />
+                        <Controls.Button 
+                            color="default"
+                            text="Reset"
+                            onClick={resetForm}
+                        />
+                    </div>
                 </Grid>
             </Grid>
-        </form>
+        </Form>
     )
 }
