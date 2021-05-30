@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControl, FormControlLabel, FormLabel, FormHelperText, Radio, RadioGroup as MuiRadioGroup } from '@material-ui/core';
 
 export default function RadioGroup(props) {
-    debugger
+
     const { name, label, value, error=null, onChange, color, items } = props;
 
         return (
