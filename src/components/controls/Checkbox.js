@@ -5,6 +5,7 @@ import { FormControl, FormControlLabel, FormHelperText, Checkbox as MuiCheckBox 
 const Select = (props) => {
     const { name, label, value, error=null, onChange, ...options } = props
 
+    // Converts the "Checked" value to the Default Event parameter alleviating an error message
     const convertToDefEventParam = (name, value) => ({
         target: {
             name, value

@@ -9,6 +9,7 @@ export default function DatePicker(props) {
     
     const { name, label, value, onChange } = props;
 
+     // Converts the "Date" value to the Default Event parameter alleviating an error messag
     const convertToDefEventParam = (name, value) => ({
         target: {
             name, value
