@@ -6,7 +6,7 @@ import DatePicker from './DatePicker'
 import Popup from './Popup'
 import RadioGroup from './RadioGroup'
 import Select from './Select'
-import Switch from './Switch'
+// import Switch from './Switch'
 
 const Controls = {
     ActionButton,
@@ -17,7 +17,7 @@ const Controls = {
     Popup,
     RadioGroup,
     Select,
-    Switch,
+    // Switch,
 }
 
 export default Controls;

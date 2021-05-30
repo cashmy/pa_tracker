@@ -7,39 +7,39 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0.5)
     },
     primary: {
-        backgroundColor: theme.pallete.primary.light,
+        backgroundColor: theme.palette.primary.light,
         '& .MuiButton-label':{
-            color: theme.pallete.primary.main
+            color: theme.palette.primary.main
         }
     },
     secondary: {
-        backgroundColor: theme.pallete.secondary.light,
+        backgroundColor: theme.palette.secondary.light,
         '& .MuiButton-label':{
-            color: theme.pallete.secondary.main
+            color: theme.palette.secondary.main
         }
     },
     error: {
-        backgroundColor: theme.pallete.error.light,
+        backgroundColor: theme.palette.error.light,
         '& .MuiButton-label':{
-            color: theme.pallete.error.main
+            color: theme.palette.error.main
         }
     },
     warning: {
-        backgroundColor: theme.pallete.warning.light,
+        backgroundColor: theme.palette.warning.light,
         '& .MuiButton-label':{
-            color: theme.pallete.warning.main
+            color: theme.palette.warning.main
         }
     },
     info: {
-        backgroundColor: theme.pallete.info.light,
+        backgroundColor: theme.palette.info.light,
         '& .MuiButton-label':{
-            color: theme.pallete.info.main
+            color: theme.palette.info.main
         }
     },
     success: {
-        backgroundColor: theme.pallete.success.light,
+        backgroundColor: theme.palette.success.light,
         '& .MuiButton-label':{
-            color: theme.pallete.success.main
+            color: theme.palette.success.main
         }
     }
 }))
@@ -53,6 +53,7 @@ export default function ActionButton(props) {
         <Button
             classes={`${classes.root} ${classes[color]}`}
             onClick={onClick}
+            color={color}
         >
             {children}
         </Button>
