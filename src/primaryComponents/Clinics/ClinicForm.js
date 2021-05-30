@@ -2,14 +2,7 @@ import React, { useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import Controls from '../../components/controls/Controls';
 import { useForm, Form } from '../../components/useForm';
-import ServiceLayer from '../../services/ServiceLayer';
-
-
-const genderItems = [
-    {id:'male', title:'Male'},
-    {id:'female', title:'Female'},
-    {id:'other', title:'Other'} ,
-]
+// import ServiceLayer from '../../services/ServiceLayer';
 
 const initialFValues = {
     clinicId: 0,
@@ -20,12 +13,12 @@ const initialFValues = {
     clinicState: '',
     clinicZip: '',
     clinicPhone: '',
-    clinicNPI: 0,
+    clinicNPI: '',
     clinicIsAGroup: false,
 }
 
 
-export default function PatientForm() {
+export default function ClinicForm() {
     
     // Validation function (to be passed as a callback)
     const validate = (fieldValues = values) => {
@@ -33,13 +26,17 @@ export default function PatientForm() {
         if('clinicName' in fieldValues) 
             temp.clinicName = fieldValues.clinicName ? "" : "This field is required." 
         if('clinicState' in fieldValues)
-            temp.clinicState = values.clinicState.length < 2 ? "" : "Maximum of letters - use abbreviation"
+                temp.clinicState = fieldValues.clinicState.length ? "" : "This field is required."
+        if('clinicState' in fieldValues && temp.clinicState === "")
+                temp.clinicState = fieldValues.clinicState.length > 1 ? "" : "Min of 2 letters - use abbrievation."
+        if('clinicState' in fieldValues && temp.clinicState === "")
+                temp.clinicState = fieldValues.clinicState.length < 3 ? "" : "Max of 2 letters - use abbrievation."
         if('clinicNPI' in fieldValues)
-            temp.clinicNPI = fieldValues.clinicNPI ? 0 : "This field is required."
-        if('clinicNPI' in fieldValues)
-            temp.clinicNPI = values.clinicNPI.length > 9 ? "" : "Minimum length of 10 digits required"
-        // temp.moble = values.mobile.length > 9 ? "" : "Minimum 10 numbers required"
-        // temp.email = (/$^|.+@.+..+/).test(values.email) ? "" : "Email is not a valid format"
+            temp.clinicNPI = fieldValues.clinicNPI ? "" : "This field is required."
+        if('clinicNPI' in fieldValues && temp.clinicNPI === "")
+            temp.clinicNPI = fieldValues.clinicNPI.length > 9 ? "" : "Minimum length of 10 digits required"
+        // temp.moble = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required"
+        // temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not a valid format"
         setErrors({
             ...temp
         })
@@ -48,9 +45,6 @@ export default function PatientForm() {
         if(fieldValues === values)
         return Object.values(temp).every(x => x === "")
     }
-
-    // const [values, setValues ] = useState(initialFValues);
-    // const classes = useStyles;
 
     const {
         values,
@@ -104,20 +98,24 @@ export default function PatientForm() {
                         onChange={handleInputChange}
                         error={errors.clinicCity}
                    />
-                    <Controls.Input
-                        name="clinicState"
-                        label="City Name"
-                        value={values.clinicState}
-                        onChange={handleInputChange}
-                        error={errors.clinicState}
-                   />
-                    <Controls.Input
-                        name="clinicZip"
-                        label="City Name"
-                        value={values.clinicZip}
-                        onChange={handleInputChange}
-                        error={errors.clinicZip}
-                   />                                   
+                   <div style={{display: "flex"}} > 
+                        <Controls.Input
+                            name="clinicState"
+                            label="State"
+                            value={values.clinicState}
+                            onChange={handleInputChange}
+                            fullWidth={false}
+                            error={errors.clinicState}
+                        />
+                        <Controls.Input
+                            name="clinicZip"
+                            label="Zip"
+                            value={values.clinicZip}
+                            onChange={handleInputChange}
+                            fullWidth={false}
+                            error={errors.clinicZip}
+                        />                  
+                   </div>                 
                 </Grid>
                 <Grid item xs={6}>
                     <Controls.Input
@@ -129,14 +127,14 @@ export default function PatientForm() {
                     />
                     <Controls.Input 
                         name="clinicNPI"
-                        label="Has an IEP"
+                        label="NPI Number"
                         value={values.clinicNPI}
                         onChange={handleInputChange}
                         error={errors.clinicNPI}
                     />
                     <Controls.Checkbox 
                         name="clinicIsAGroup"
-                        label="In ABA"
+                        label="Clinic is a Group"
                         value={values.clinicIsAGroup}
                         onChange={handleInputChange}
                     />

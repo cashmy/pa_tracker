@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PageHeader(props) {
     
-    const {title, subtitle, icon, fontSize, isSvg} = props
+    const {title, subtitle, icon, fontSize, isSvg=false} = props
     const classes = useStyles();
 
     return (
@@ -41,9 +41,14 @@ export default function PageHeader(props) {
                             {icon}
                         </Grid> */}
                         <Grid item className={classes.pageIcon}>
-                            <SvgIcon fontSize={fontSize || "large"} >
+                        {isSvg 
+                            ? <SvgIcon fontSize={fontSize || "large"} >
                                 {icon}
-                            </SvgIcon>
+                              </SvgIcon>
+
+                            : {icon}
+
+                        }
                         </Grid>
                         <Grid item className={classes.pageTitle}>
                             <Typography variant="h6" >
