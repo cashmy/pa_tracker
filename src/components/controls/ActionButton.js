@@ -7,37 +7,34 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0.5)
     },
     primary: {
-        backgroundColor: theme.palette.primary.light,
         '& .MuiButton-label':{
             color: theme.palette.primary.main
         }
     },
     secondary: {
-        backgroundColor: theme.palette.secondary.light,
         '& .MuiButton-label':{
             color: theme.palette.secondary.main
         }
     },
+    // Console errros will be logged if the following colors are used. 
+    // The program will compile and run successfully though.
+    // Material-ui standards define the use of primary, secondary, and default only.
     error: {
-        backgroundColor: theme.palette.error.light,
         '& .MuiButton-label':{
             color: theme.palette.error.main
         }
     },
     warning: {
-        backgroundColor: theme.palette.warning.light,
         '& .MuiButton-label':{
             color: theme.palette.warning.main
         }
     },
     info: {
-        backgroundColor: theme.palette.info.light,
         '& .MuiButton-label':{
             color: theme.palette.info.main
         }
     },
     success: {
-        backgroundColor: theme.palette.success.light,
         '& .MuiButton-label':{
             color: theme.palette.success.main
         }
@@ -51,7 +48,7 @@ export default function ActionButton(props) {
 
     return (
         <Button
-            classes={`${classes.root} ${classes[color]}`}
+            className={`${classes.root} ${classes[color]}`}
             onClick={onClick}
             color={color}
         >
