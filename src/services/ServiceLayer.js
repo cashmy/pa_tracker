@@ -24,25 +24,62 @@ class ServiceLayer {
             const jwt = localStorage.getItem('token')
             return axios.get('https://localhost:44394/api/clinic/', {headers: {Authorization: 'Bearer ' + jwt}});
         }
+        // async getAllClinics(){
+        //     const jwt = localStorage.getItem('token')
+        //     try{
+        //         const response = await axios.get('https://localhost:44394/api/clinic/', {headers: {Authorization: 'Bearer ' + jwt}});
+        //         console.log("Inside svc layer:  ", response.data)
+        //         return response.data
+        //     }
+        //     catch(e){
+        //         console.log('API call unsuccessful. ',e)
+        //     }
+        // }
     
-        getClinic(id){
+        async getClinic(id){
             const jwt = localStorage.getItem('token')
-            return axios.get(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+            try{
+                const response = await axios.get(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+                return response.data
+            }
+            catch(e){
+                console.log('API call unsuccessful. ',e)
+            }
         }
     
-        addClinic(data){
+        async addClinic(data){
             const jwt = localStorage.getItem('token')
-            return axios.post('https://localhost:44394/api/clinic/', data, {headers: {Authorization: 'Bearer ' + jwt}});
+            try{
+                const response = await axios.post('https://localhost:44394/api/clinic/', data, {headers: {Authorization: 'Bearer ' + jwt}});
+                return response.data
+            }
+            catch(e){
+                console.log('API call unsuccessful. ',e)
+            }
         }
     
-        updateClinic(id, data){
+        async updateClinic(data){
             const jwt = localStorage.getItem('token')
-            return axios.put(`https://localhost:44394/api/clinic/${id}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
+            // console.log("SL-Clinc-Id: ",id)
+            console.log("SL-Clinc-Data: ",data)
+            try{
+                const response = await axios.put(`https://localhost:44394/api/clinic/${data.clinicId}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
+                return response.data
+            }
+            catch(e){
+                console.log('API call unsuccessful. ',e)
+            }
         }
     
-        deleteClinic(id){
+        async deleteClinic(id){
             const jwt = localStorage.getItem('token')
-            return axios.delete(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+            try{
+                const response = await axios.delete(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+                return response.data
+            }
+            catch(e){
+                console.log('API call unsuccessful. ',e)
+            }
         }
 
     // ***** PATIENT End points *****

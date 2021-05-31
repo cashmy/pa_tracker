@@ -93,7 +93,7 @@ export default function useTable(records, columnCells, filterFn) {
         />)
 
     // From the Material UI documents
-    // modified to allow the ability to sort of objects
+    // modified to allow the ability to include the sort of objects
     function stableSort(array,comparator){
         const stabilizedThis = array.map((el, index) => [el, index]);
         stabilizedThis.sort((a, b) => {

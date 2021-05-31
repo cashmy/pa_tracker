@@ -18,9 +18,12 @@ const initialFValues = {
 }
 
 
-export default function ClinicForm() {
+export default function ClinicForm(props) {
     
+    const {addOrEdit, recordForEdit} = props
+
     // Validation function (to be passed as a callback)
+    // TODO: Consider/research using a Switch/Case statement instead
     const validate = (fieldValues = values) => {
         let temp = {...errors};
         if('clinicName' in fieldValues) 
@@ -48,7 +51,7 @@ export default function ClinicForm() {
 
     const {
         values,
-        // setValues,
+        setValues,
         errors,
         setErrors,
         handleInputChange,
@@ -59,12 +62,16 @@ export default function ClinicForm() {
     const handleSubmit = (event) => {
         event.preventDefault();
         if(validate())
-            alert("All good")
+            addOrEdit(values, resetForm);
     };
 
 
     useEffect(() => {
-    },[values])
+        if(recordForEdit != null) 
+        setValues({
+            ...recordForEdit
+        }) 
+    },[recordForEdit])
 
     return(
         <Form>
