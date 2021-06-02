@@ -11,8 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Image from '../../assets/images/wallpapersden.com_star-wars-skywalker-saga_3840x2400.jpg';
-import serviceLayer from '../../Services/serviceLayer';
+import Image from '../../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg';
+import serviceLayer from '../../services/ServiceLayer';
 
 
 const useStyles = makeStyles((theme) => ({
