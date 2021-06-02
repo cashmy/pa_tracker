@@ -1,17 +1,10 @@
 import axios from 'axios';
+import authHeader from "./authHeader";
+
+const API_URL = "https://localhost:44394/api/";
 
 class ServiceLayer {
-
-    getToken(){
-        const jwt = localStorage.getItem('token');
-        if(jwt){
-            return jwt;
-        }
-        else{
-            window.location.href="/login"
-        }
-    }
-    // Financial Class - Used here in case of refactoring into a separate model in the database.
+    // Financial Class - Used here for potential later refactoring into a separate model in the database.
     // for now it will simply be a "standard"
     getAllFinancialClasses = () => ([
         { id: 'CO', title: 'Commercial' },
@@ -21,25 +14,12 @@ class ServiceLayer {
 
         // ***** CLINC End points *****
         getAllClinics(){
-            const jwt = localStorage.getItem('token')
-            return axios.get('https://localhost:44394/api/clinic/', {headers: {Authorization: 'Bearer ' + jwt}});
-        }
-        // async getAllClinics(){
-        //     const jwt = localStorage.getItem('token')
-        //     try{
-        //         const response = await axios.get('https://localhost:44394/api/clinic/', {headers: {Authorization: 'Bearer ' + jwt}});
-        //         console.log("Inside svc layer:  ", response.data)
-        //         return response.data
-        //     }
-        //     catch(e){
-        //         console.log('API call unsuccessful. ',e)
-        //     }
-        // }
+            return axios.get(API_URL + "clinic", { headers: authHeader() });
+    }
     
         async getClinic(id){
-            const jwt = localStorage.getItem('token')
             try{
-                const response = await axios.get(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+                const response = await axios.get(API_URL + `/${id}`, { headers: authHeader() });
                 return response.data
             }
             catch(e){
@@ -48,9 +28,8 @@ class ServiceLayer {
         }
     
         async addClinic(data){
-            const jwt = localStorage.getItem('token')
             try{
-                const response = await axios.post('https://localhost:44394/api/clinic/', data, {headers: {Authorization: 'Bearer ' + jwt}});
+                const response = await axios.post(API_URL + "clinic", data, { headers: authHeader() });
                 return response.data
             }
             catch(e){
@@ -59,11 +38,10 @@ class ServiceLayer {
         }
     
         async updateClinic(data){
-            const jwt = localStorage.getItem('token')
             // console.log("SL-Clinc-Id: ",id)
             console.log("SL-Clinc-Data: ",data)
             try{
-                const response = await axios.put(`https://localhost:44394/api/clinic/${data.clinicId}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
+                const response = await axios.put(API_URL + `clinic/${data.clinicId}`, data, { headers: authHeader() });
                 return response.data
             }
             catch(e){
@@ -72,9 +50,8 @@ class ServiceLayer {
         }
     
         async deleteClinic(id){
-            const jwt = localStorage.getItem('token')
             try{
-                const response = await axios.delete(`https://localhost:44394/api/clinic/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+                const response = await axios.delete(API_URL + `clinic/${id}`, { headers: authHeader() });
                 return response.data
             }
             catch(e){
@@ -84,67 +61,75 @@ class ServiceLayer {
 
     // ***** PATIENT End points *****
     getAllPatients(){
-        const jwt = localStorage.getItem('token')
-        return axios.get('https://localhost:44394/api/patient/', {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.get(API_URL + 'patient', { headers: authHeader() });
     }
 
     getPatient(id){
-        const jwt = localStorage.getItem('token')
-        return axios.get(`https://localhost:44394/api/patient/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.get(API_URL + `patient/${id}`, { headers: authHeader() });
     }
 
     addPatient(data){
-        const jwt = localStorage.getItem('token')
-        return axios.post('https://localhost:44394/api/patient/', data, {headers: {Authorization: 'Bearer ' + jwt}});
+        console.log(data)
+        return axios.post(API_URL + 'patient', data, { headers: authHeader() });
     }
 
     updatePatient(id, data){
-        const jwt = localStorage.getItem('token')
-        return axios.put(`https://localhost:44394/api/patient/${id}`, data, {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.put(API_URL + `patient/${id}`, data, { headers: authHeader() });
     }
 
     deletePatient(id){
-        const jwt = localStorage.getItem('token')
-        return axios.delete(`https://localhost:44394/api/patient/${id}`, {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.delete(API_URL + `patient/${id}`, { headers: authHeader() });
     }
 
     // ***** USER End points: Authentication and Profile *****
     // Request for User
     registerUser(data){
-        return axios.post('https://localhost:44394/api/authentication/', data);
+        return axios.post(API_URL + 'authentication', data);
     }
 
     userLogin(data){
-        return axios.post('https://localhost:44394/api/authentication/login', data);
+        return axios.post(API_URL + 'authentication/login', data);
     }
 
-    
+    // login = (username, password) => {
+    //     return axios
+    //         .post(API_URL + "authentication/login", data)
+    //         .then((response) => {
+    //             if (response.data.accessToken) {
+    //                 localStorage.setItem("user", JSON.stringify(response.data));
+    //             }
+
+    //             return response.data;
+    //         });
+    // };
+
+    logout = () => {
+        localStorage.removeItem("user");
+    }
+
     getUserProfile(){
-        const jwt = localStorage.getItem('token')
-        return axios.get('https://localhost:44394/api/user/profile', {headers: {Authorization: 'Bearer ' + jwt}});
+
+        return axios.get(API_URL + 'user/profile', { headers: authHeader() });
     }
     
     updateUser(data){
-        const jwt = localStorage.getItem('token')
-        return axios.put('https://localhost:44394/api/user', data, {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.put(API_URL + 'user', data, { headers: authHeader() });
     }
 
     // Admin use only
     addUser(data){
-        const jwt = localStorage.getItem('token')
-        return axios.post('https://localhost:44394/api/user', data, {headers: {Authorization: 'Bearer ' + jwt}})
+
+        return axios.post(API_URL + 'user', data, { headers: authHeader() });
     }
 
     // Admin use only
     getAllUsers(){
-        const jwt = localStorage.getItem('token')
-        return axios.get('https://localhost:44394/api/user/', {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.get(API_URL + 'user/', { headers: authHeader() });
     }
 
     // Admin use only
     deleteUser(){
-        const jwt = localStorage.getItem('token')
-        return axios.delete('https://localhost:44394/api/user', {headers: {Authorization: 'Bearer ' + jwt}});
+        return axios.delete(API_URL + 'user', { headers: authHeader() });
     }
 
 }
