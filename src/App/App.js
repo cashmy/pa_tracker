@@ -12,12 +12,14 @@ import BackgroundImage  from '../assets/images/national-cancer-institute-NFvdKIh
 import CarrierTable from '../primaryComponents/Carriers/CarrierTable';
 import ClinicTable from '../primaryComponents/Clinics/ClinicTable';
 import PatientFormFull from '../primaryComponents/Patients/PatientFormFull'
-import ProviderTable from '../primaryComponents/Providers/ProviderTable'; 
-import StatusTable from '../mfComponents/Statuses/StatusTable'; 
+import ProviderTable from '../primaryComponents/Providers/ProviderTable';
+
 import CPTCodeTable from '../mfComponents/CPTCodes/CPTCodeTable'; 
 import DiagCodeTable from '../mfComponents/DiagCodes/DiagCodeTable'; 
 import PlaceOfServiceTable from '../mfComponents/PlaceOfService/PlaceOfServiceTable';
+import NoteTypeTable from '../mfComponents/NoteTypes/NoteTypeTable'; 
 import SpecialtyTable from '../mfComponents/Specialty/SpecialtyTable';
+import StatusTable from '../mfComponents/Statuses/StatusTable'; 
 
 import Drawer from '../components/Drawer/Drawer';
 import RegistrationSide from "../components/RegistrationSide/RegistrationSide";
@@ -68,10 +70,12 @@ class App extends Component {
           <Route path="/clinic" component={ClinicTable} />
           <Route path="/patient/full" component={PatientFormFull} />
           <Route path="/provider" component={ProviderTable} />
-          <Route path="/status" component={StatusTable} />
+
           <Route path="/cptCode" component={CPTCodeTable} />
           <Route path="/diagnosisCode" component={DiagCodeTable} />
+          <Route path="/noteType" component={NoteTypeTable} />
           <Route path="/placeofservice" component={PlaceOfServiceTable} />
+          <Route path="/status" component={StatusTable} />
           <Route path="/treatment" component={SpecialtyTable} />
           
           <SignInSide />

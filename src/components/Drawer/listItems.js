@@ -30,7 +30,7 @@ import PeopleIcon from '@material-ui/icons/People'; // Carriers (?)
 // MasterFile Icons
 import { ReactComponent as CPTIcon } from '../../assets/svg_icons/cpt.svg'; // CPT Codes
 import { ReactComponent as DiagIcon } from '../../assets/svg_icons/diagnosis.svg'; // Diagnosis Codes
-// import { ReactComponent as NoteTypeIcon } from '../../assets/svg_icons/note_types.svg'; // NoteType Codes
+import { ReactComponent as NoteTypeIcon } from '../../assets/svg_icons/note_types.svg'; // NoteType Codes
 import { ReactComponent as POSIcon } from '../../assets/svg_icons/placeOfService.svg'; // Place of Service Codes
 import { ReactComponent as SpecialtyIcon } from '../../assets/svg_icons/specialty.svg'; // Treatement-Therapy Codes
 import { ReactComponent as StatusIcon } from '../../assets/svg_icons/battery_status.svg'; // Status Codes
@@ -153,15 +153,15 @@ export const mainListItems = (
         <ListItemText primary="Diagnosis Codes" />
       </ListItem>
     </Link>
-
-    <Link component={RouterLink} to={'status'}>
+    
+    <Link component={RouterLink} to={'noteType'}>
       <ListItem button>
           <ListItemIcon>
             <SvgIcon>
-              <StatusIcon />
+              <NoteTypeIcon />
             </SvgIcon>
         </ListItemIcon>
-        <ListItemText primary="Statuses" />
+        <ListItemText primary="Note Types" />
       </ListItem>
     </Link>
 
@@ -184,6 +184,17 @@ export const mainListItems = (
             </SvgIcon>
         </ListItemIcon>
         <ListItemText primary="Specialties" />
+      </ListItem>
+    </Link>
+
+    <Link component={RouterLink} to={'status'}>
+      <ListItem button>
+          <ListItemIcon>
+            <SvgIcon>
+              <StatusIcon />
+            </SvgIcon>
+        </ListItemIcon>
+        <ListItemText primary="Statuses" />
       </ListItem>
     </Link>
 

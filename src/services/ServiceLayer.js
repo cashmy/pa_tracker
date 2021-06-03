@@ -12,53 +12,6 @@ class ServiceLayer {
         { id: 'SP', title: 'Self-Pay' }
     ])
 
-        // ***** CLINC End points *****
-        getAllClinics(){
-            return axios.get(API_URL + "clinic", { headers: authHeader() });
-    }
-    
-        async getClinic(id){
-            try{
-                const response = await axios.get(API_URL + `/${id}`, { headers: authHeader() });
-                return response.data
-            }
-            catch(e){
-                console.log('API call unsuccessful. ',e)
-            }
-        }
-    
-        async addClinic(data){
-            try{
-                const response = await axios.post(API_URL + "clinic", data, { headers: authHeader() });
-                return response.data
-            }
-            catch(e){
-                console.log('API call unsuccessful. ',e)
-            }
-        }
-    
-        async updateClinic(data){
-            // console.log("SL-Clinc-Id: ",id)
-            console.log("SL-Clinc-Data: ",data)
-            try{
-                const response = await axios.put(API_URL + `clinic/${data.clinicId}`, data, { headers: authHeader() });
-                return response.data
-            }
-            catch(e){
-                console.log('API call unsuccessful. ',e)
-            }
-        }
-    
-        async deleteClinic(id){
-            try{
-                const response = await axios.delete(API_URL + `clinic/${id}`, { headers: authHeader() });
-                return response.data
-            }
-            catch(e){
-                console.log('API call unsuccessful. ',e)
-            }
-        }
-
     // ***** PATIENT End points *****
     getAllPatients(){
         return axios.get(API_URL + 'patient', { headers: authHeader() });
