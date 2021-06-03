@@ -23,8 +23,7 @@ import { mainListItems, secondaryListItems } from './listItems';
 // import PageHeader from '../PageHeader/PageHeader';
 
 import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
-// import PatientForm from '../../primaryComponents/Patients/PatientForm'; 
-import ClinicTable from '../../primaryComponents/Clinics/ClinicTable'; 
+import PatientForm from '../../primaryComponents/Patients/PatientForm'; 
 
 
 
@@ -209,7 +208,7 @@ export default function Dashboard() {
             </Grid> */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <ClinicTable />
+                <PatientForm />
                 <PatientTable />
               </Paper>
             </Grid>

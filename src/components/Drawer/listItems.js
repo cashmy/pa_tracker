@@ -25,7 +25,7 @@ import LayersIcon from '@material-ui/icons/Layers'; // PA Views
 import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.svg'; // Patients
 import { ReactComponent as ClinicIcon } from '../../assets/svg_icons/clinic.svg'; // Clinics
 import { ReactComponent as ProviderIcon } from '../../assets/svg_icons/provider.svg'; // Providers
-// import People from '@material-ui/icons/People'; // Carriers (?)
+import PeopleIcon from '@material-ui/icons/People'; // Carriers (?)
 
 // MasterFile Icons
 import { ReactComponent as CPTIcon } from '../../assets/svg_icons/cpt.svg'; // CPT Codes
@@ -53,6 +53,17 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="PA Views" />
     </ListItem>
+    
+    <Link component={RouterLink} to={'carrier'}>
+      <ListItem button>
+          <ListItemIcon>
+            <SvgIcon>
+              <PeopleIcon />
+            </SvgIcon>
+        </ListItemIcon>
+        <ListItemText primary="Carriers" />
+      </ListItem>
+    </Link>
 
     <ListSubheader inset>Company</ListSubheader>
     {/* <ListItem button>
