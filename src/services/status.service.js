@@ -18,18 +18,15 @@ class StatusService {
   };
 
   updateStatus = (data) => {
-    console.log("Provider serviceLayer: ", data)
-        axios
-            .put(API_URL + `/${data.providerId}`, data, { headers: authHeader() })
-            .then((response) => {
-                if (response.data) {
-                    console.log("Response: ", response.data)
-                }
+    axios
+        .put(API_URL + `/${data.providerId}`, data, { headers: authHeader() })
+        .then((response) => {
+            if (response.data) {
+                console.log("Response: ", response.data)
+            }
 
-                return response.data;
-            });
-
-    // return axios.put(API_URL + `/${data.providerId}`, data, { headers: authHeader() })
+            return response.data;
+        });
   };
 
   deleteStatus = (id) => {

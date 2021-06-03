@@ -1,44 +1,36 @@
 import axios from 'axios';
 import authHeader from "./authHeader";
 
-const API_URL = "https://localhost:44394/api/";
+const API_URL = "https://localhost:44394/api/clinic";
 
+class ClinicService {
+  getAllClinics = () => {
+    return axios.get(API_URL, { headers: authHeader() });
+  };
 
-const getAllClinics = () => {
-    return axios.get(API_URL + "clinic", { headers: authHeader() });
-};
+  getClinic = (id) => {
+    return axios.get(API_URL + `/${id}`, { headers: authHeader() });
+  };
 
-// async const getAllClinics = () => {
-//     try{
-//         const response = await axios.get(API_URL + "clinic", { headers: authHeader() });
-//         console.log("Inside svc layer:  ", response.data)
-//         return response.data
-//     }
-//     catch(e){
-//         console.log('API call unsuccessful. ',e)
-//     }
-// }
+  addClinic = (data) => {
+    return axios.post(API_URL, data, { headers: authHeader() });
+  };
 
-const getClinic = (id) => {
-  return axios.get(API_URL + `/${id}`, { headers: authHeader() });
-};
+  updateClinic = (data) => {
+    axios
+      .put(API_URL + `/${data.clinicId}`, data, { headers: authHeader() })
+      .then((response) => {
+          if (response.data) {
+              console.log("Response: ", response.data)
+          }
 
-const addClinic = (data) => {
-    return axios.post(API_URL + "clinic", data, { headers: authHeader() });
-};
+          return response.data;
+      });
+  };
 
-const updateClinic = (data) => {
-  return axios.put(API_URL + `clinic/${data.clinicId}`, data, { headers: authHeader() })
-};
-
-const deleteClinic = (id) => {
-    return axios.delete(API_URL + `clinic/${id}`, { headers: authHeader() });
+  deleteClinic = (id) => {
+    return axios.delete(API_URL + `/${id}`, { headers: authHeader() });
+  }
 }
 
-export default {
-    getAllClinics,
-    getClinic,
-    addClinic,
-    updateClinic,
-    deleteClinic,
-};
+export default new ClinicService();
