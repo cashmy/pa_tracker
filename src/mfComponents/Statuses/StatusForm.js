@@ -55,7 +55,6 @@ export default function StatusForm(props) {
 
 
     useEffect(() => {
-        console.log("Provider table load")
         if(recordForEdit != null) 
         setValues({
             ...recordForEdit

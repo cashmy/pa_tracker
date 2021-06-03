@@ -50,7 +50,6 @@ export default function PlaceOfServiceForm(props) {
 
 
     useEffect(() => {
-        console.log("Provider table load")
         if(recordForEdit != null) 
         setValues({
             ...recordForEdit

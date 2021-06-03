@@ -63,7 +63,7 @@ export default function CPTCodeForm(props) {
                     <Controls.Input
                         name="cptCodeId" 
                         label="Code"
-                        fullWidth="false"
+                        fullWidth={false}
                         value={values.cptCodeId}
                         onChange={handleInputChange}
                         error={errors.cptCodeId}
