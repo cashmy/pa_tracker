@@ -4,12 +4,12 @@ import Controls from '../../components/controls/Controls';
 import { useForm, Form } from '../../components/useForm';
 
 const initialFValues = {
-    cptCodeId: '',
-    cptDescription: '',
+    treatmentCode: '',
+    treatmentName: '',
 }
 
 
-export default function CPTCodeForm(props) {
+export default function SpecialtyCodeForm(props) {
     
     const {addOrEdit, recordForEdit} = props
 
@@ -17,10 +17,10 @@ export default function CPTCodeForm(props) {
     // TODO: Consider/research using a Switch/Case statement instead
     const validate = (fieldValues = values) => {
         let temp = {...errors};
-        if('cptCodeId' in fieldValues) 
-            temp.cptCodeId = fieldValues.cptCodeId ? "" : "This field is required."
-        if('cptDescription' in fieldValues)
-            temp.cptDescription = fieldValues.cptDescription ? "" : "This field is required."             
+        if('treatmentCode' in fieldValues) 
+            temp.treatmentCode = fieldValues.treatmentCode ? "" : "This field is required."
+        if('treatmentName' in fieldValues)
+            temp.treatmentName = fieldValues.treatmentName ? "" : "This field is required."             
 
         setErrors({
             ...temp
@@ -49,7 +49,6 @@ export default function CPTCodeForm(props) {
 
 
     useEffect(() => {
-        console.log("CPT table load")
         if(recordForEdit != null) 
         setValues({
             ...recordForEdit
@@ -61,21 +60,19 @@ export default function CPTCodeForm(props) {
             <Grid container alignItems="flex-start" spacing={2}>
                 <Grid item xs={12}>
                     <Controls.Input
-                        name="cptCodeId" 
-                        label="Code"
+                        name="treatmentCode" 
+                        label="Specialty Code"
                         fullWidth="false"
-                        value={values.cptCodeId}
+                        value={values.treatmentCode}
                         onChange={handleInputChange}
-                        error={errors.cptCodeId}
+                        error={errors.treatmentCode}
                     />
                     <Controls.Input
-                        name="cptDescription" 
-                        label="Description"
-                        value={values.cptDescription}
+                        name="treatmentName" 
+                        label="Specialty Name"
+                        value={values.treatmentName}
                         onChange={handleInputChange}
-                        error={errors.cptDescription}
-                        multiline
-                        rowsMax={6}
+                        error={errors.treatmentName}
                     />
                         <Grid styles={{display: "flex"}}>
                             <div styles={{display: "flex"}}>

@@ -180,7 +180,7 @@ export default function ProviderTable() {
                                                     isOpen:true,
                                                     title:"Are you sure you want to delete this Provider?",
                                                     subTitle: "You can't undo this action.",
-                                                    onConfirm:() => { onDelete(item.providerId) },
+                                                    onConfirm:() => { onDelete(item.placeOfServiceCode) },
                                                 })
                                             }}>
                                             <DeleteIcon fontSize="small" />

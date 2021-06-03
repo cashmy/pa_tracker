@@ -182,7 +182,7 @@ export default function SpecialtyTable() {
                                                     isOpen:true,
                                                     title:"Are you sure you want to delete this Specialty?",
                                                     subTitle: "You can't undo this action.",
-                                                    onConfirm:() => { onDelete(item.providerId) },
+                                                    onConfirm:() => { onDelete(item.treatmentCode) },
                                                 })
                                             }}>
                                             <DeleteIcon fontSize="small" />

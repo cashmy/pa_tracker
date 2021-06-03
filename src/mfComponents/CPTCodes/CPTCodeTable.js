@@ -187,7 +187,7 @@ export default function CPTCodeTable() {
                                                     isOpen:true,
                                                     title:"Are you sure you want to delete this Provider?",
                                                     subTitle: "You can't undo this action.",
-                                                    onConfirm:() => { onDelete(item.providerId) },
+                                                    onConfirm:() => { onDelete(item.cptCodeId) },
                                                 })
                                             }}>
                                             <DeleteIcon fontSize="small" />
