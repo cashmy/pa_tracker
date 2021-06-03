@@ -5,15 +5,15 @@ import AddIcon from '@material-ui/icons/Add';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SearchIcon from '@material-ui/icons/Search';
-import { ReactComponent as CPTIcon } from '../../assets/svg_icons/cpt.svg'
+import { ReactComponent as DiagIcon } from '../../assets/svg_icons/diagnosis.svg'
 // Wrapped Components
 import Controls from '../../components/controls/Controls';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import useTable from "../../components/useTable"
 // Service Layer
-import CPTCodeService from '../../services/cptCode.service';
+import DiagCodeService from '../../services/diagCode.service';
 // Primary CRUD Child Component
-import CPTCodeForm from './CPTCodeForm';
+import DiagCodeForm from './DiagCodeForm';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const columnCells = [
-    { id: 'cptCodeId', label: 'CPT Code' },
-    { id: 'cptDescription', label: 'Description' },
+    { id: 'diagCode', label: 'Diagnosis Code' },
+    { id: 'diagDescription', label: 'Description' },
     { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
@@ -54,12 +54,12 @@ export default function ProviderTable() {
 
 
     useEffect(() => {
-        getCPTCodes()
+        getDiagCodes()
     }, [loadData])
         
-    async function getCPTCodes() {
+    async function getDiagCodes() {
         try {
-            const response = await CPTCodeService.getAllCPTCodes();
+            const response = await DiagCodeService.getAllDiagCodes();
             setRecords(response.data);
             setLoadData(false)
         }
@@ -85,19 +85,19 @@ export default function ProviderTable() {
                     return items;
                 else
                     return items.filter(x => (
-                        x.cptDescription.toLowerCase().includes(target.value.toLowerCase()) 
+                        x.diagDescription.toLowerCase().includes(target.value.toLowerCase()) 
                     ))
             }
         })
     }
 
-    const addOrEdit = (cptCode, resetForm) => {
+    const addOrEdit = (diagCode, resetForm) => {
         if (mode === "ADD") {
-            CPTCodeService.addCPTCode(cptCode)
+            DiagCodeService.addDiagCode(diagCode)
             setLoadData(true); // Request reload of data
         }
         else {
-            CPTCodeService.updateCPTCode(cptCode) 
+            DiagCodeService.updateDiagCode(diagCode) 
             setLoadData(true); // Request reload of data
         }
         resetForm()
@@ -121,7 +121,7 @@ export default function ProviderTable() {
             ...confirmDialog,
             isOpen: false,
         })
-        CPTCodeService.deleteCPTCode(id)
+        DiagCodeService.deleteDiagCode(id)
         setLoadData(true);
         setNotify({
             isOpen: true,
@@ -133,9 +133,9 @@ export default function ProviderTable() {
     return (
         <>
             <PageHeader
-                title="CPT Codes"
-                subtitle="List of Current Procedural Terminology (CPT) Codes"
-                icon={<CPTIcon />}
+                title="Diagnosis Codes"
+                subtitle="List of ICD-10 Diagnosis Codes & Descriptions"
+                icon={<DiagIcon />}
                 isSvg={true}
             />
 
@@ -168,11 +168,11 @@ export default function ProviderTable() {
                     <TableBody>
                         {
                             recordsAfterPagingAndSorting().map(item => (
-                                <TableRow key={item.cptCodeId}>
-                                    <TableCell>{item.cptCodeId}</TableCell>
+                                <TableRow key={item.diagCode}>
+                                    <TableCell>{item.diagCode}</TableCell>
                                     <TableCell
                                         className ={classes.searchInput}
-                                    >{item.cptDescription}</TableCell>
+                                    >{item.diagDescription}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
@@ -205,7 +205,7 @@ export default function ProviderTable() {
                 setOpenPopup = {setOpenPopup}
                 title="Place Of Service Form"
             >
-                <CPTCodeForm 
+                <DiagCodeForm 
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit}
                 />

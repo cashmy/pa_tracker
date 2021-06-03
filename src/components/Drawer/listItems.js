@@ -29,7 +29,7 @@ import { ReactComponent as ProviderIcon } from '../../assets/svg_icons/provider.
 
 // MasterFile Icons
 import { ReactComponent as CPTIcon } from '../../assets/svg_icons/cpt.svg'; // CPT Codes
-// import { ReactComponent as DiagIcon } from '../../assets/svg_icons/diagnosis.svg'; // Diagnosis Codes
+import { ReactComponent as DiagIcon } from '../../assets/svg_icons/diagnosis.svg'; // Diagnosis Codes
 // import { ReactComponent as NoteTypeIcon } from '../../assets/svg_icons/note_types.svg'; // NoteType Codes
 import { ReactComponent as POSIcon } from '../../assets/svg_icons/placeOfService.svg'; // Place of Service Codes
 // import { ReactComponent as TreatmentIcon } from '../../assets/svg_icons/treatment.svg'; // Treatement-Therapy Codes
@@ -121,7 +121,7 @@ export const mainListItems = (
         <ListItemText primary="Master Files" />
       </ListItem> */}
     
-      <Link component={RouterLink} to={'cptCode'}>
+    <Link component={RouterLink} to={'cptCode'}>
       <ListItem button>
           <ListItemIcon>
             <SvgIcon>
@@ -132,6 +132,17 @@ export const mainListItems = (
       </ListItem>
     </Link>
     
+    <Link component={RouterLink} to={'diagnosisCode'}>
+      <ListItem button>
+          <ListItemIcon>
+            <SvgIcon>
+              <DiagIcon />
+            </SvgIcon>
+        </ListItemIcon>
+        <ListItemText primary="Diagnosis Codes" />
+      </ListItem>
+    </Link>
+
     <Link component={RouterLink} to={'status'}>
       <ListItem button>
           <ListItemIcon>
