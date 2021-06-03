@@ -39,7 +39,7 @@ const columnCells = [
     { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
-export default function ProviderTable() {
+export default function CPTCodeTable() {
 
     const classes = useStyles();
     const [mode, setMode] = useState("");
