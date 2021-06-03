@@ -28,7 +28,7 @@ import { ReactComponent as ProviderIcon } from '../../assets/svg_icons/provider.
 // import People from '@material-ui/icons/People'; // Carriers (?)
 
 // MasterFile Icons
-// import { ReactComponent as CPTIcon } from '../../assets/svg_icons/cpt.svg'; // CPT Codes
+import { ReactComponent as CPTIcon } from '../../assets/svg_icons/cpt.svg'; // CPT Codes
 // import { ReactComponent as DiagIcon } from '../../assets/svg_icons/diagnosis.svg'; // Diagnosis Codes
 // import { ReactComponent as NoteTypeIcon } from '../../assets/svg_icons/note_types.svg'; // NoteType Codes
 import { ReactComponent as POSIcon } from '../../assets/svg_icons/placeOfService.svg'; // Place of Service Codes
@@ -120,6 +120,17 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Master Files" />
       </ListItem> */}
+    
+      <Link component={RouterLink} to={'cptCode'}>
+      <ListItem button>
+          <ListItemIcon>
+            <SvgIcon>
+              <CPTIcon />
+            </SvgIcon>
+        </ListItemIcon>
+        <ListItemText primary="CPT Codes" />
+      </ListItem>
+    </Link>
     
     <Link component={RouterLink} to={'status'}>
       <ListItem button>
