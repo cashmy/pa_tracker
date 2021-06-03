@@ -62,7 +62,7 @@ export default function DiagCodeForm(props) {
                     <Controls.Input
                         name="diagCode" 
                         label="Code"
-                        fullWidth="false"
+                        fullWidth={false}
                         value={values.diagCode}
                         onChange={handleInputChange}
                         error={errors.diagCode}

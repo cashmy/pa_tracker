@@ -64,7 +64,7 @@ export default function PlaceOfServiceForm(props) {
                     <Controls.Input
                         name="placeOfServiceCode" 
                         label="Code"
-                        fullWidth="false"
+                        fullWidth={false}
                         value={values.placeOfServiceCode}
                         onChange={handleInputChange}
                         error={errors.placeOfServiceCode}

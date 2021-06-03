@@ -139,7 +139,6 @@ export default function DataGridDemo() {
         patient.patientDOB = new Date(patient.patientDOB) 
         return patient;
     });
-    console.log(mapResult)
     return mapResult
   }
 

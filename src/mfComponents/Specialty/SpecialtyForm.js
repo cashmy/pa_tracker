@@ -62,7 +62,7 @@ export default function SpecialtyCodeForm(props) {
                     <Controls.Input
                         name="treatmentCode" 
                         label="Specialty Code"
-                        fullWidth="false"
+                        fullWidth={false}
                         value={values.treatmentCode}
                         onChange={handleInputChange}
                         error={errors.treatmentCode}
