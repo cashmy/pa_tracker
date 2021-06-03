@@ -1,23 +1,23 @@
 import axios from 'axios';
 import authHeader from "./authHeader";
 
-const API_URL = "https://localhost:44394/api/provider";
+const API_URL = "https://localhost:44394/api/status";
 
-class ProviderService {
-  getAllProviders = () => {
+class StatusService {
+  getAllStatuses = () => {
     return axios.get(API_URL, { headers: authHeader() });
   };
 
-  getProvider = (id) => {
+  getStatus = (id) => {
     return axios.get(API_URL + `/${id}`, { headers: authHeader() });
   };
 
-  addProvider = (data) => {
+  addStatus = (data) => {
     console.log("requesting post: ", data)
     return axios.post(API_URL, data, { headers: authHeader() });
   };
 
-  updateProvider = (data) => {
+  updateStatus = (data) => {
     console.log("Provider serviceLayer: ", data)
         axios
             .put(API_URL + `/${data.providerId}`, data, { headers: authHeader() })
@@ -32,9 +32,9 @@ class ProviderService {
     // return axios.put(API_URL + `/${data.providerId}`, data, { headers: authHeader() })
   };
 
-  deleteProvider = (id) => {
+  deleteStatus = (id) => {
     return axios.delete(API_URL + `/${id}`, { headers: authHeader() });
   }
 }
 
-export default new ProviderService();
+export default new StatusService();
