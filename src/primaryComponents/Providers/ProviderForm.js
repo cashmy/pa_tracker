@@ -142,7 +142,7 @@ export default function ProviderForm(props) {
                         <Grid item xs={6}>
                             <Controls.Checkbox 
                                 name="providerRcvEmails"
-                                label="Rcv Emails"s
+                                label="Rcv Emails"
                                 value={values.providerRcvEmails}
                                 onChange={handleInputChange}
                                 />

@@ -5,16 +5,15 @@ import AddIcon from '@material-ui/icons/Add';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SearchIcon from '@material-ui/icons/Search';
-import { ReactComponent as ProviderIcon } from '../../assets/svg_icons/provider.svg'
+import { ReactComponent as StatusIcon } from '../../assets/svg_icons/battery_status.svg'
 // Wrapped Components
 import Controls from '../../components/controls/Controls';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import useTable from "../../components/useTable"
 // Service Layer
-import ProviderService from '../../services/provider.service';
+import StatusService from '../../services/status.service';
 // Primary CRUD Child Component
-import ProviderForm from '../../primaryComponents/Providers/ProviderForm';
-
+import StatusForm from './StatusForm';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -32,12 +31,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const columnCells = [
-    { id: 'providerFirstName', label: 'First Name' },
-    { id: 'providerLastName', label: 'Last Name' },
-    { id: 'providerEmail', label: 'Email'},
-    { id: 'providerPhone', label: 'Phone', disableSorting: true },
-    { id: 'providerNPI', label: 'NPI', disableSorting: true },
-    { id: 'providerTaxonomy', label: 'Taxonomy', disableSorting: true },
+    { id: 'statusName', label: 'Status' },
+    { id: 'statusColor', label: 'Color', disableSorting: true  },
+    { id: 'statusTextColor', label: 'Text Color', disableSorting: true },
+    { id: 'displayOnSummary', label: 'On Dashboard'},
     { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
@@ -55,12 +52,12 @@ export default function ProviderTable() {
 
 
     useEffect(() => {
-        getProviders()
+        getStatuses()
     }, [loadData])
         
-    async function getProviders() {
+    async function getStatuses() {
         try {
-            const response = await ProviderService.getAllProviders();
+            const response = await StatusService.getAllStatuses();
             setRecords(response.data);
             setLoadData(false)
         }
@@ -86,23 +83,19 @@ export default function ProviderTable() {
                     return items;
                 else
                     return items.filter(x => (
-                        x.providerFirstName.toLowerCase().includes(target.value.toLowerCase()) 
-                        || x.providerLastName.toLowerCase().includes(target.value.toLowerCase())
-                        || x.providerNPI.toLowerCase().includes(target.value.toLowerCase())
-                        || x.providerEmail.toLowerCase().includes(target.value.toLowerCase())
+                        x.statusName.toLowerCase().includes(target.value.toLowerCase()) 
                     ))
             }
         })
     }
 
-    const addOrEdit = (provider, resetForm) => {
-        if (provider.providerId === 0) {
-            console.log("Provider data to add: ", provider)
-            ProviderService.addProvider(provider)
+    const addOrEdit = (status, resetForm) => {
+        if (status.statusId === 0) {
+            StatusService.addStatus(status)
             setLoadData(true); // Request reload of data
         }
         else {
-            ProviderService.updateProvider(provider) 
+            StatusService.updateStatus(status) 
             setLoadData(true); // Request reload of data
         }
         resetForm()
@@ -125,7 +118,7 @@ export default function ProviderTable() {
             ...confirmDialog,
             isOpen: false,
         })
-        ProviderService.deleteProvider(id)
+        StatusService.deleteStatus(id)
         setLoadData(true);
         setNotify({
             isOpen: true,
@@ -137,16 +130,16 @@ export default function ProviderTable() {
     return (
         <>
             <PageHeader
-                title="Providers"
-                subtitle="List of available Provider/Therapists"
-                icon={<ProviderIcon />}
+                title="Statuses"
+                subtitle="List of Statuses assignable to Prior Authorizations"
+                icon={<StatusIcon />}
                 isSvg={true}
             />
 
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input 
-                        label="Search First Name, Last Name, Email, and NPI's"
+                        label="Search Status Name/Description"
                         fullWidth={false}
                         className ={classes.searchInput}
                         InputProps={{
@@ -172,13 +165,11 @@ export default function ProviderTable() {
                     <TableBody>
                         {
                             recordsAfterPagingAndSorting().map(item => (
-                                <TableRow key={item.providerId}>
-                                    <TableCell>{item.providerFirstName}</TableCell>
-                                    <TableCell>{item.providerLastName}</TableCell>
-                                    <TableCell>{item.providerEmail}</TableCell>
-                                    <TableCell>{item.providerPhone }</TableCell>
-                                    <TableCell>{item.providerNPI}</TableCell>
-                                    <TableCell>{item.providerTaxonomy}</TableCell>
+                                <TableRow key={item.statusId}>
+                                    <TableCell>{item.statusName}</TableCell>
+                                    <TableCell>{item.statusColor}</TableCell>
+                                    <TableCell>{item.statusTextColor}</TableCell>
+                                    <TableCell>{item.displayOnSummary}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
@@ -209,9 +200,9 @@ export default function ProviderTable() {
             <Controls.Popup
                 openPopup = {openPopup}
                 setOpenPopup = {setOpenPopup}
-                title="Provider Form"
+                title="Status Form"
             >
-                <ProviderForm 
+                <StatusForm 
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit}
                 />

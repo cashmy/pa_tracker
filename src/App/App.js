@@ -10,7 +10,9 @@ import BackgroundImage  from '../assets/images/national-cancer-institute-NFvdKIh
 
 // Views for Routing
 import ClinicTable from '../primaryComponents/Clinics/ClinicTable';
+import PatientFormFull from '../primaryComponents/Patients/PatientFormFull'
 import ProviderTable from '../primaryComponents/Providers/ProviderTable'; 
+import StatusTable from '../mfComponents/Statuses/StatusTable'; 
 import Drawer from '../components/Drawer/Drawer';
 import RegistrationSide from "../components/RegistrationSide/RegistrationSide"
 import SignInSide from '../components/SignInSide/SignInSide.js';
@@ -57,7 +59,10 @@ class App extends Component {
           <Route exact={true} path="/registration" component={RegistrationSide}/> 
           <Route path="/drawer" component={Drawer} />
           <Route path="/clinic" component={ClinicTable} />
+          <Route path="/patient/full" component={PatientFormFull} />
           <Route path="/provider" component={ProviderTable} />
+          <Route path="/status" component={StatusTable} />
+          
           <SignInSide />
         </Switch>
         {/* <Footer /> */}
