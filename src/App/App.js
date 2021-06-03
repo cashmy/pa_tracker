@@ -9,6 +9,7 @@ import { CssBaseline, Paper } from '@material-ui/core';
 import BackgroundImage  from '../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg';
 
 // Views for Routing
+import CarrierTable from '../primaryComponents/Carriers/CarrierTable';
 import ClinicTable from '../primaryComponents/Clinics/ClinicTable';
 import PatientFormFull from '../primaryComponents/Patients/PatientFormFull'
 import ProviderTable from '../primaryComponents/Providers/ProviderTable'; 
@@ -62,6 +63,7 @@ class App extends Component {
           />
           <Route exact={true} path="/registration" component={RegistrationSide}/> 
           <Route path="/drawer" component={Drawer} />
+          <Route path="/carrier" component={CarrierTable} />
           <Route path="/clinic" component={ClinicTable} />
           <Route path="/patient/full" component={PatientFormFull} />
           <Route path="/provider" component={ProviderTable} />
