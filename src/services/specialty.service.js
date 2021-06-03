@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from "./authHeader";
 
-const API_URL = "https://localhost:44394/api/treatment";
+const API_URL = "https://localhost:44394/api/treatmentClass";
 
 class SpecialtyService {
   getAllSpecialties = () => {

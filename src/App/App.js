@@ -17,6 +17,7 @@ import StatusTable from '../mfComponents/Statuses/StatusTable';
 import CPTCodeTable from '../mfComponents/CPTCodes/CPTCodeTable'; 
 import DiagCodeTable from '../mfComponents/DiagCodes/DiagCodeTable'; 
 import PlaceOfServiceTable from '../mfComponents/PlaceOfService/PlaceOfServiceTable';
+import SpecialtyTable from '../mfComponents/Specialty/SpecialtyTable';
 
 import Drawer from '../components/Drawer/Drawer';
 import RegistrationSide from "../components/RegistrationSide/RegistrationSide";
@@ -71,6 +72,7 @@ class App extends Component {
           <Route path="/cptCode" component={CPTCodeTable} />
           <Route path="/diagnosisCode" component={DiagCodeTable} />
           <Route path="/placeofservice" component={PlaceOfServiceTable} />
+          <Route path="/treatment" component={SpecialtyTable} />
           
           <SignInSide />
         </Switch>
