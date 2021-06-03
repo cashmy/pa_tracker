@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { InputAdornment, Paper, makeStyles, Fab, TableBody, TableRow, TableCell, Toolbar } from '@material-ui/core';
 import useTable from "../../components/useTable"
-// import EditIcon from '@material-ui/icons/Edit';
-// import DeleteIcon from '@material-ui/icons/Delete';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
@@ -11,7 +9,9 @@ import ServiceLayer from '../../services/ServiceLayer';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import { ReactComponent as ClinicIcon } from '../../assets/svg_icons/clinic.svg'
 import Controls from '../../components/controls/Controls';
-import ClinicForm from '../../primaryComponents/Clinics/ClinicForm'; 
+import ClinicForm from '../../primaryComponents/Clinics/ClinicForm';
+
+
 
 const useStyles = makeStyles((theme) => ({
     pageContent: {
@@ -38,27 +38,32 @@ const columnCells = [
 export default function ClinicTable() {
 
     const classes = useStyles();
+    const [loadData, setLoadData] = useState(true)
     const [recordForEdit, setRecordForEdit] = useState(null);
     const [records, setRecords] = useState([]);
     // Initialize with a default filter of all records, bypasses initial load error
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } });
     const [openPopup, setOpenPopup] = useState(false)
+    const [notify, setNotify] = useState({isOpen: false, message: '', type:''})
+    const [confirmDialog, setConfirmDialog] = useState({isOpen:false, title:'', subTitle:''})
+
+    // const dispatch = useDispatch();
 
     useEffect(() => {
         getClinics()
-      },[])
+    }, [loadData])
+    
 
-    //   // TODO: Swap this out with Redux Actions/Reducers
-    async function getClinics(e){
-        try{
+    async function getClinics(e) {
+        try {
             const response = await ServiceLayer.getAllClinics();
             setRecords(response.data);
         }
-        catch(e){
+        catch (e) {
             console.log('API call unsuccessful', e)
         }
     }
-
+    
     const { 
         TblContainer,
         TblHead,
@@ -75,7 +80,11 @@ export default function ClinicTable() {
                 if (target.value === "")
                     return items;
                 else
-                    return items.filter(x => x.clinicName.toLowerCase().includes(target.value))
+                    return items.filter(x => (
+                        x.clinicName.toLowerCase().includes(target.value.toLowerCase()) 
+                        || x.clinicCity.toLowerCase().includes(target.value.toLowerCase())
+                        || x.clinicNPI.toLowerCase().includes(target.value.toLowerCase())
+                    ))
             }
         })
     }
@@ -84,21 +93,39 @@ export default function ClinicTable() {
         console.log("Clinic id: ", clinic.clinicId)
         if (clinic.clinicId === 0) {
             ServiceLayer.addClinic(clinic)
-        } else
-        {
-            ServiceLayer.updateClinic(clinic)
+            setLoadData(true); // Request reload of data
         }
-        setRecordForEdit(null)
+        else {
+            ServiceLayer.updateClinic(clinic) 
+            setLoadData(true); // Request reload of data
+        }
         resetForm()
-        setOpenPopup(false)
-        // TODO Activiate with appropriate hook or redux call
-        // Async, even with useEffect ... not working timely.
-        getClinics();
+        setRecordForEdit(null)
+        setOpenPopup(false) // Close Popup modal
+        setNotify({
+            isOpen: true,
+            message: 'Submitted Successfully',
+            type: 'success'
+        })
     }
 
     const openInPopup = item => {
         setRecordForEdit(item)
         setOpenPopup(true)
+    }
+
+    const onDelete = id => {
+        setConfirmDialog({
+            ...confirmDialog,
+            isOpen: false,
+        })
+        ServiceLayer.deleteClinic(id)
+        setLoadData(true);
+        setNotify({
+            isOpen: true,
+            message: 'Record deleted',
+            type: 'error'
+        })
     }
 
     return (
@@ -113,7 +140,7 @@ export default function ClinicTable() {
             <Paper className={classes.pageContent}>
                 <Toolbar>
                     <Controls.Input 
-                        label="Search Clincs"
+                        label="Search Clincs, Cities, and NPI's"
                         fullWidth={false}
                         className ={classes.searchInput}
                         InputProps={{
@@ -146,12 +173,19 @@ export default function ClinicTable() {
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
-                                            onClick = {() => openInPopup(item)}
-                                        >
+                                            onClick = {() => openInPopup(item)}>
                                             <EditOutlinedIcon fontSize="small" />
                                         </Controls.ActionButton>
                                         <Controls.ActionButton
-                                            color="secondary">
+                                            color="secondary"
+                                            onClick={() => {
+                                                setConfirmDialog({
+                                                    isOpen:true,
+                                                    title:"Are you sure you want to delete this clinic?",
+                                                    subTitle: "You can't undo this action.",
+                                                    onConfirm:() => { onDelete(item.clinicId) },
+                                                })
+                                            }}>
                                             <DeleteIcon fontSize="small" />
                                         </Controls.ActionButton>
                                     </TableCell>
@@ -172,6 +206,14 @@ export default function ClinicTable() {
                     addOrEdit={addOrEdit}
                 />
             </Controls.Popup>
+            <Controls.Notification
+                notify={notify}
+                setNotify={setNotify}
+            />
+            <Controls.ConfirmDialog 
+                confirmDialog={confirmDialog}
+                setConfirmDialog={setConfirmDialog}
+            />
         </>
     )
 

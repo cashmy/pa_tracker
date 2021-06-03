@@ -60,6 +60,7 @@ export default function ClinicForm(props) {
     
     // SaveSubmit Callback handler - event driven
     const handleSubmit = (event) => {
+        console.log("Clinic Submitted")
         event.preventDefault();
         if(validate())
             addOrEdit(values, resetForm);

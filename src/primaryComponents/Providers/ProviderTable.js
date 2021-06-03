@@ -52,10 +52,8 @@ export default function ProviderTable() {
     // const dispatch = useDispatch();
 
     useEffect(() => {
-        if (loadData) 
-            getProviders()
-    }, [loadData],getProviders())
-        
+        getProviders()
+    }, [loadData])
         
     async function getProviders() {
         try {
@@ -96,6 +94,7 @@ export default function ProviderTable() {
 
     const addOrEdit = (provider, resetForm) => {
         if (provider.providerId === 0) {
+            console.log("Provider data to add: ", provider)
             ProviderService.addProvider(provider)
             setLoadData(true); // Request reload of data
         }
@@ -180,6 +179,7 @@ export default function ProviderTable() {
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
+                                            size="large"
                                             onClick = {() => openInPopup(item)}>
                                             <EditOutlinedIcon fontSize="small" />
                                         </Controls.ActionButton>
