@@ -22,7 +22,7 @@ import { mainListItems, secondaryListItems } from './listItems';
 // import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.svg'
 // import PageHeader from '../PageHeader/PageHeader';
 
-// import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
+import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
 // import PatientForm from '../../primaryComponents/Patients/PatientForm'; 
 import ClinicTable from '../../primaryComponents/Clinics/ClinicTable'; 
 
@@ -209,10 +209,8 @@ export default function Dashboard() {
             </Grid> */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                {/* <ClinicForm /> */}
                 <ClinicTable />
-                {/* <PatientForm /> */}
-                {/* <PatientTable /> */}
+                <PatientTable />
               </Paper>
             </Grid>
           </Grid>
