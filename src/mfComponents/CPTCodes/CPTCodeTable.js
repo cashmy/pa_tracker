@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         width: '75%',
     },
     multiLineDesc: {
-        width: '75%',
+        width: '50%',
     },
     addButton: {
         position: 'absolute',
@@ -171,7 +171,7 @@ export default function CPTCodeTable() {
                                 <TableRow key={item.cptCodeId}>
                                     <TableCell>{item.cptCodeId}</TableCell>
                                     <TableCell
-                                        className ={classes.searchInput}
+                                        className ={classes.multiLineDesc}
                                     >{item.cptDescription}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton

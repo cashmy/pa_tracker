@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         width: '75%',
     },
     multiLineDesc: {
-        width: '75%',
+        width: '50%',
     },
     addButton: {
         position: 'absolute',
@@ -171,7 +171,7 @@ export default function ProviderTable() {
                                 <TableRow key={item.diagCode}>
                                     <TableCell>{item.diagCode}</TableCell>
                                     <TableCell
-                                        className ={classes.searchInput}
+                                        className ={classes.multiLineDesc}
                                     >{item.diagDescription}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
