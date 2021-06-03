@@ -8,6 +8,7 @@ import Notification from './Notification'
 import Popup from './Popup'
 import RadioGroup from './RadioGroup'
 import Select from './Select'
+import StatusCard from './StatusCard'
 
 const Controls = {
     ActionButton,
@@ -20,6 +21,7 @@ const Controls = {
     Popup,
     RadioGroup,
     Select,
+    StatusCard,
 }
 
 export default Controls;
