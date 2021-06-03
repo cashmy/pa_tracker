@@ -13,8 +13,10 @@ import ClinicTable from '../primaryComponents/Clinics/ClinicTable';
 import PatientFormFull from '../primaryComponents/Patients/PatientFormFull'
 import ProviderTable from '../primaryComponents/Providers/ProviderTable'; 
 import StatusTable from '../mfComponents/Statuses/StatusTable'; 
+import PlaceOfServiceTable from '../mfComponents/PlaceOfService/PlaceOfServiceTable';
+
 import Drawer from '../components/Drawer/Drawer';
-import RegistrationSide from "../components/RegistrationSide/RegistrationSide"
+import RegistrationSide from "../components/RegistrationSide/RegistrationSide";
 import SignInSide from '../components/SignInSide/SignInSide.js';
 
 const styles = {
@@ -62,6 +64,7 @@ class App extends Component {
           <Route path="/patient/full" component={PatientFormFull} />
           <Route path="/provider" component={ProviderTable} />
           <Route path="/status" component={StatusTable} />
+          <Route path="/placeofservice" component={PlaceOfServiceTable} />
           
           <SignInSide />
         </Switch>

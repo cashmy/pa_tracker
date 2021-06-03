@@ -31,7 +31,7 @@ import { ReactComponent as ProviderIcon } from '../../assets/svg_icons/provider.
 // import { ReactComponent as CPTIcon } from '../../assets/svg_icons/cpt.svg'; // CPT Codes
 // import { ReactComponent as DiagIcon } from '../../assets/svg_icons/diagnosis.svg'; // Diagnosis Codes
 // import { ReactComponent as NoteTypeIcon } from '../../assets/svg_icons/note_types.svg'; // NoteType Codes
-// import { ReactComponent as POSIcon } from '../../assets/svg_icons/placeOfService.svg'; // Place of Service Codes
+import { ReactComponent as POSIcon } from '../../assets/svg_icons/placeOfService.svg'; // Place of Service Codes
 // import { ReactComponent as TreatmentIcon } from '../../assets/svg_icons/treatment.svg'; // Treatement-Therapy Codes
 import { ReactComponent as StatusIcon } from '../../assets/svg_icons/battery_status.svg'; // Status Codes
 
@@ -129,6 +129,17 @@ export const mainListItems = (
             </SvgIcon>
         </ListItemIcon>
         <ListItemText primary="Statuses" />
+      </ListItem>
+    </Link>
+
+    <Link component={RouterLink} to={'placeofservice'}>
+      <ListItem button>
+          <ListItemIcon>
+            <SvgIcon>
+              <POSIcon />
+            </SvgIcon>
+        </ListItemIcon>
+        <ListItemText primary="Places Of Service" />
       </ListItem>
     </Link>
   

@@ -5,15 +5,12 @@ import { useForm, Form } from '../../components/useForm';
 // import ServiceLayer from '../../services/ServiceLayer';
 
 const initialFValues = {
-    statusId: 0,
-    statusName: '',
-    statusColor : '',
-    statusTextColor : '',
-    displayOnSummary: false,
+    placeOfServiceCode: '',
+    placeOfServiceDesc: '',
 }
 
 
-export default function StatusForm(props) {
+export default function PlaceOfServiceForm(props) {
     
     const {addOrEdit, recordForEdit} = props
 
@@ -21,12 +18,10 @@ export default function StatusForm(props) {
     // TODO: Consider/research using a Switch/Case statement instead
     const validate = (fieldValues = values) => {
         let temp = {...errors};
-        if('statusName' in fieldValues) 
-            temp.statusName = fieldValues.statusName ? "" : "This field is required."
-        if('statusColor' in fieldValues)
-            temp.statusColor = fieldValues.statusColor ? "" : "This field is required."        
-        if('statusTextColor' in fieldValues)
-            temp.statusTextColor = fieldValues.statusTextColor ? "" :  "This field is required."       
+        if('placeOfServiceCode' in fieldValues) 
+            temp.placeOfServiceCode = fieldValues.placeOfServiceCode ? "" : "This field is required."
+        if('placeOfServiceDesc' in fieldValues)
+            temp.placeOfServiceDesc = fieldValues.placeOfServiceDesc ? "" : "This field is required."             
 
         setErrors({
             ...temp
@@ -67,33 +62,20 @@ export default function StatusForm(props) {
             <Grid container alignItems="flex-start" spacing={2}>
                 <Grid item xs={12}>
                     <Controls.Input
-                        name="statusName" 
-                        label="Name"
-                        value={values.statusName}
+                        name="placeOfServiceCode" 
+                        label="Code"
+                        fullWidth="false"
+                        value={values.placeOfServiceCode}
                         onChange={handleInputChange}
-                        error={errors.statusName}
+                        error={errors.placeOfServiceCode}
                     />
                     <Controls.Input
-                        name="statusColor" 
-                        label="Color (Background)"
-                        value={values.statusColor}
+                        name="placeOfServiceDesc" 
+                        label="Description"
+                        value={values.placeOfServiceDesc}
                         onChange={handleInputChange}
-                        error={errors.statusColor}
+                        error={errors.placeOfServiceDesc}
                     />
-                    <Controls.Input 
-                        name="statusTextColor"
-                        label="Text Color"
-                        value={values.statusTextColor}
-                        onChange={handleInputChange}
-                        error={errors.statusTextColor}
-                    />
-                    <Controls.Checkbox 
-                        name="displayOnSummary"
-                        label="Display on Dashboard"
-                        value={values.displayOnSummary}
-                        onChange={handleInputChange}
-                        />
-                
                         <Grid styles={{display: "flex"}}>
                             <div styles={{display: "flex"}}>
                                 <Controls.Button 
