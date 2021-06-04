@@ -10,8 +10,7 @@ import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.sv
 import Controls from '../../components/controls/Controls';
 import PageHeader from '../../components/PageHeader/PageHeader';
 // Service Layer
-import ServiceLayer from '../../services/ServiceLayer';
-import CPTCodeService from '../../services/cptCode.service';
+import PatientService from '../../services/patient.service';
 // Primary CRUD Child Component
 import PatientForm from './PatientForm';
 
@@ -144,7 +143,6 @@ export default function DataGridDemo() {
   const [patients, setPatients] = useState([])
   const [loadData, setLoadData] = useState(true)
   const [recordForEdit, setRecordForEdit] = useState(null);
-  const [records, setRecords] = useState([]);
   const [openPopup, setOpenPopup] = useState(false)
   const [notify, setNotify] = useState({isOpen: false, message: '', type:''})
   const [confirmDialog, setConfirmDialog] = useState({isOpen:false, title:'', subTitle:''})
@@ -152,12 +150,13 @@ export default function DataGridDemo() {
 
   useEffect(() => {
     getPatients();
-  },[])
+  },[loadData])
   
   async function getPatients(e){
     try{
-        const response = await ServiceLayer.getAllPatients();
+        const response = await PatientService.getAllPatients();
         setPatients(response.data);
+        setLoadData(false)
     }
     catch(e){
         console.log('API call unsuccessful', e)
@@ -175,19 +174,19 @@ export default function DataGridDemo() {
     return mapResult
   }
   
-  const openInPopup = item => {
-      setRecordForEdit(item)
-      setOpenPopup(true)
-  }
+  // const openInPopup = item => {
+  //     setRecordForEdit(item)
+  //     setOpenPopup(true)
+  // }
   
   
-  const addOrEdit = (cptCode, resetForm) => {
+  const addOrEdit = (patient, resetForm) => {
       if (mode === "ADD") {
-          CPTCodeService.addCPTCode(cptCode)
+          PatientService.addPatient(patient)
           setLoadData(true); // Request reload of data
       }
       else {
-          CPTCodeService.updateCPTCode(cptCode) 
+          PatientService.updatePatient(patient) 
           setLoadData(true); // Request reload of data
       }
       resetForm()
