@@ -132,17 +132,7 @@ export default function SignInSide() {
     })
   }
   
-  const onChangeCurrencyCode = (e) => {
-    setUser({
-      ...user, currencyCode: e.target.value
-    })
-  }
 
-  const onChangeIsSupplier = (e) => {
-    setUser({
-      ...user, isSupplier: e.target.checked
-    })
-  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -243,35 +233,6 @@ export default function SignInSide() {
                     value={user.phoneNumber}
                     onChange={onChangePhoneNumber}
                     autoComplete="phoneNumber"
-                  />
-                </Grid>
-                <Grid item xs={3}>
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="currencyCode"
-                    label="Currency"
-                    id="currencyCode"
-                    value={user.currencyCode}
-                    onChange={onChangeCurrencyCode}
-                  />
-                </Grid>
-                <Grid item xs={3}>
-                  <FormControlLabel
-                    value="top"
-                    control ={
-                      <Checkbox
-                        style={{marginTop: '16'}}
-                        name="isSupplier"
-                        id="isSupplier"
-                        checked={user.isSupplier}
-                        onChange={onChangeIsSupplier}
-                      />
-                    } 
-                    label="Supplier"
-                    labelPlacement="top"
                   />
                 </Grid>
             </Grid>
