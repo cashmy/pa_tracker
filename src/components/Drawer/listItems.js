@@ -47,12 +47,16 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
+
+  <Link component={RouterLink} to={'priorAuth'}> 
     <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="PA Views" />
+      <ListItemText primary="Prior Authorizations" />
     </ListItem>
+  </Link>
+
     
     <Link component={RouterLink} to={'carrier'}>
       <ListItem button>

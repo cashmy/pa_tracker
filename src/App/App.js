@@ -25,6 +25,9 @@ import Drawer from '../components/Drawer/Drawer';
 import RegistrationSide from "../components/RegistrationSide/RegistrationSide";
 import SignInSide from '../components/SignInSide/SignInSide.js';
 
+import PAByStatus from '../priorAuthComponents/PriorAuths/PAByStatus'
+import PATable from '../priorAuthComponents/PriorAuths/PATable'
+
 const styles = {
   paperContainer: {
     backgroundImage: `url(${BackgroundImage})`, 
@@ -66,6 +69,9 @@ class App extends Component {
           />
           <Route exact={true} path="/registration" component={RegistrationSide}/> 
           <Route path="/drawer" component={Drawer} />
+
+          <Route path="/priorAuth/status:1" component={PAByStatus} />
+          <Route path="/priorAuth/" component={PATable} />
           <Route path="/carrier" component={CarrierTable} />
           <Route path="/clinic" component={ClinicTable} />
           <Route path="/patient/full" component={PatientFormFull} />

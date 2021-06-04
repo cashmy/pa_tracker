@@ -22,8 +22,9 @@ import { mainListItems, secondaryListItems } from './listItems';
 // import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.svg'
 // import PageHeader from '../PageHeader/PageHeader';
 
-import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
+// import PatientTable from '../../primaryComponents/Patients/PatientTable'; 
 import PatientForm from '../../primaryComponents/Patients/PatientForm'; 
+import Dashboard from '../Dashboard/Dashboard'; 
 
 
 
@@ -119,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function DashboardContainer() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -183,6 +184,7 @@ export default function Dashboard() {
         {/* Add views (... sans login ?) */}
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
+            <Dashboard />
             {/* Chart */}
             {/* <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
@@ -206,12 +208,12 @@ export default function Dashboard() {
                 icon={<PatientIcon />}
               />      
             </Grid> */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <PatientForm />
                 <PatientTable />
               </Paper>
-            </Grid>
+            </Grid> */}
           </Grid>
           
           {/* Optional Copyright - [May move to Footer] */}
