@@ -28,14 +28,14 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 
-export default function PageHeader(props) {
+export default function PageHeaderBgClr(props) {
     
-    const {title, subtitle, icon, fontSize, isSvg=false} = props
+    const {title, subtitle, icon, fontSize, isSvg=false, textColor, backgroundColor} = props
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <Paper elevation={3}> 
+            <Paper elevation={3} style={{ backgroundColor}}> 
                 <Grid container className={classes.pageHeader} >
                         {/* <Grid item className={classes.pageIcon}>
                             {icon}

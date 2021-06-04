@@ -21,13 +21,13 @@ import SearchIcon from '@material-ui/icons/Search';
 import { ReactComponent as ProviderIcon } from '../../assets/svg_icons/provider.svg'
 // Wrapped Components
 import Controls from '../../components/controls/Controls';
-import PageHeader from '../../components/PageHeader/PageHeader';
+import PageHeaderBgClr from '../../components/PageHeader/PageHeader';
 import useTable from "../../components/useTable"
 // Service Layer
 import PriorAuthService from '../../services/priorAuth.service';
 import StatusService from '../../services/status.service';
 // Primary CRUD Child Component
-import PriorAuthForm from '../../primaryComponents/Providers/ProviderForm';
+// import PriorAuthForm from '../../primaryComponents/Providers/ProviderForm';
 
 
 
@@ -187,11 +187,13 @@ export default function ProviderTable(props) {
 
     return (
         <>
-            <PageHeader
+            <PageHeaderBgClr
                 title={`Prior Authorizations for Status:   ${statusTitle}`}
                 subtitle="List of all PA's for a given status. ----- (Use switch to toggle between active and archived.)"
                 icon={<ProviderIcon />}
                 isSvg={true}
+                BackgroundColor={statusBackgroundColor}
+                textcolor={statusTextColor}
             />
 
             <Paper className={classes.pageContent}>
