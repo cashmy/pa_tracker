@@ -12,28 +12,6 @@ class ServiceLayer {
         { id: 'SP', title: 'Self-Pay' }
     ])
 
-    // ***** PATIENT End points *****
-    getAllPatients(){
-        return axios.get(API_URL + 'patient', { headers: authHeader() });
-    }
-
-    getPatient(id){
-        return axios.get(API_URL + `patient/${id}`, { headers: authHeader() });
-    }
-
-    addPatient(data){
-        console.log(data)
-        return axios.post(API_URL + 'patient', data, { headers: authHeader() });
-    }
-
-    updatePatient(id, data){
-        return axios.put(API_URL + `patient/${id}`, data, { headers: authHeader() });
-    }
-
-    deletePatient(id){
-        return axios.delete(API_URL + `patient/${id}`, { headers: authHeader() });
-    }
-
     // ***** USER End points: Authentication and Profile *****
     // Request for User
     registerUser(data){
