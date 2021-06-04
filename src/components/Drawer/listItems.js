@@ -106,7 +106,7 @@ export const mainListItems = (
       </ListItem>
     </Link>
 
-    <Link component={RouterLink} to={'patient'}>
+    <Link component={RouterLink} to={'patient/full'}>
       <ListItem button>
           <ListItemIcon>
             <SvgIcon>

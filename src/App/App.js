@@ -11,7 +11,7 @@ import BackgroundImage  from '../assets/images/national-cancer-institute-NFvdKIh
 // Views for Routing
 import CarrierTable from '../primaryComponents/Carriers/CarrierTable';
 import ClinicTable from '../primaryComponents/Clinics/ClinicTable';
-import PatientFormFull from '../primaryComponents/Patients/PatientFormFull'
+import PatientTable from '../primaryComponents/Patients/PatientTable'
 import ProviderTable from '../primaryComponents/Providers/ProviderTable';
 
 import CPTCodeTable from '../mfComponents/CPTCodes/CPTCodeTable'; 
@@ -74,7 +74,7 @@ class App extends Component {
           <Route path="/priorAuth/" component={PATable} />
           <Route path="/carrier" component={CarrierTable} />
           <Route path="/clinic" component={ClinicTable} />
-          <Route path="/patient/full" component={PatientFormFull} />
+          <Route path="/patient" component={PatientTable} />
           <Route path="/provider" component={ProviderTable} />
 
           <Route path="/cptCode" component={CPTCodeTable} />

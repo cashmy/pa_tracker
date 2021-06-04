@@ -1,22 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
-import { makeStyles } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton, InputAdornment, Paper, makeStyles, Fab } from '@material-ui/core';
+// Icons
+import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { ReactComponent as PatientIcon } from '../../assets/svg_icons/patient.svg'
+// Wrapped Components
+import Controls from '../../components/controls/Controls';
+import PageHeader from '../../components/PageHeader/PageHeader';
+// Service Layer
 import ServiceLayer from '../../services/ServiceLayer';
+import CPTCodeService from '../../services/cptCode.service';
+// Primary CRUD Child Component
+import PatientForm from './PatientForm';
+
 
 // ***** Styles *****
 const useStyles = makeStyles((theme) => ({
+  pageContent: {
+      margin: theme.spacing(5),
+      padding: theme.spacing(3)
+  },
+  searchInput: {
+      width: '75%',
+  },
+  multiLineDesc: {
+      width: '50%',
+  },
+  addButton: {
+      position: 'absolute',
+      right: '10px',
+  },
   toolbar: {
       justifyContent: 'flex-end',
     }
   }
 ))
 
+
+
 // ***** Event Handlers *****
 const handleEditRow = (id) => {
   alert(`Editing Row for : ${id}`)
+  
 }
 
 const handleDeleteRow = (id) => {
@@ -113,13 +140,20 @@ const columns  = [
 // ***** Main Function *****
 export default function DataGridDemo() {
   const classes = useStyles();
+  const [mode, setMode] = useState("");
   const [patients, setPatients] = useState([])
+  const [loadData, setLoadData] = useState(true)
+  const [recordForEdit, setRecordForEdit] = useState(null);
+  const [records, setRecords] = useState([]);
+  const [openPopup, setOpenPopup] = useState(false)
+  const [notify, setNotify] = useState({isOpen: false, message: '', type:''})
+  const [confirmDialog, setConfirmDialog] = useState({isOpen:false, title:'', subTitle:''})
+
 
   useEffect(() => {
     getPatients();
   },[])
   
-  // TODO: Swap this out with Redux Actions/Reducers
   async function getPatients(e){
     try{
         const response = await ServiceLayer.getAllPatients();
@@ -130,7 +164,6 @@ export default function DataGridDemo() {
     }
   }
   
-  // TODO: Access Redux Store to map data
   const mapPatients = () => {
     let mapResult = patients.map((patient, i) => {
         // Need "id" only for DataGrid to work (operates as key)
@@ -141,21 +174,75 @@ export default function DataGridDemo() {
     });
     return mapResult
   }
+  
+  const openInPopup = item => {
+      setRecordForEdit(item)
+      setOpenPopup(true)
+  }
+  
+  
+  const addOrEdit = (cptCode, resetForm) => {
+      if (mode === "ADD") {
+          CPTCodeService.addCPTCode(cptCode)
+          setLoadData(true); // Request reload of data
+      }
+      else {
+          CPTCodeService.updateCPTCode(cptCode) 
+          setLoadData(true); // Request reload of data
+      }
+      resetForm()
+      setMode("")
+      setRecordForEdit(null)
+      setOpenPopup(false) // Close Popup modal
+      setNotify({
+          isOpen: true,
+          message: 'Submitted Successfully',
+          type: 'success'
+      })
+  }
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid 
-        classes={{
-          toolbar: classes.toolbar,
-        }}
-        rows={mapPatients()}
-        columns={columns} 
-        pageSize={5} 
-        // checkboxSelection 
-        components={{
-            Toolbar: GridToolbar,
-          }}
-    />
-    </div>
+    <>
+      <PageHeader
+        title="Patients"
+        subtitle="List of patients"
+        icon={<PatientIcon />}
+        isSvg={true}
+        />
+      <Paper className={classes.pageContent}>
+        <div style={{ height: 400, width: '100%' }}>
+          <DataGrid 
+            classes={{
+              toolbar: classes.toolbar,
+            }}
+            rows={mapPatients()}
+            columns={columns} 
+            pageSize={5} 
+            // checkboxSelection 
+            components={{
+                Toolbar: GridToolbar,
+              }}
+          />
+        </div>
+      </Paper >
+      <Controls.Popup
+          openPopup = {openPopup}
+          setOpenPopup = {setOpenPopup}
+          title="Patient Form"
+      >
+          <PatientForm 
+              recordForEdit={recordForEdit}
+              addOrEdit={addOrEdit}
+          />
+      </Controls.Popup>
+      <Controls.Notification
+          notify={notify}
+          setNotify={setNotify}
+      />
+      <Controls.ConfirmDialog 
+          confirmDialog={confirmDialog}
+          setConfirmDialog={setConfirmDialog}
+      />
+    </>
   );
 }

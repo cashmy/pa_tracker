@@ -101,11 +101,16 @@ export default function Dashboard() {
             </Grid>
 
             {/* *** Provider Summary Table *** */}
-            <Grid container className={classes.container} >
-                <Grid item xs={12} md={8} lg={9}>
-                <Paper className={fixedHeightPaper}>
-                    Table goes here
-                </Paper>
+            <Grid container className={classes.container} spacing={10}>
+                <Grid item xs={6}>
+                    <Paper className={fixedHeightPaper}>
+                        Provider Table goes here
+                    </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                    <Paper className={fixedHeightPaper}>
+                        Carrier Table goes here
+                    </Paper>
                 </Grid>
             </Grid>
         </>
