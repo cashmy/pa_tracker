@@ -19,7 +19,7 @@ class StatusService {
 
   updateStatus = (data) => {
     axios
-        .put(API_URL + `/${data.providerId}`, data, { headers: authHeader() })
+        .put(API_URL + `/${data.statusId}`, data, { headers: authHeader() })
         .then((response) => {
             if (response.data) {
                 console.log("Response: ", response.data)

@@ -16,6 +16,14 @@ class ProviderService {
     return axios.get(API_URL + `/status/${id}/archive/${archiveStatus}`, { headers: authHeader() });
   }
 
+  getNonApprvdCountForProviders = () => {
+    return axios.get(API_URL + '/provcount', { headers: authHeader() });
+  };
+
+  getNonApprvdCountForCarriers = () => {
+    return axios.get(API_URL + '/carrcount', { headers: authHeader() });
+  };
+
   getPABasic = (id) => {
     return axios.get(API_URL + `/${id}`, { headers: authHeader() });
   };
