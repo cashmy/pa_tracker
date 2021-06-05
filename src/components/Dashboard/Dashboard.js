@@ -22,12 +22,16 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         flexDirection: 'column',
     },
+    crossfoottable: {
+        marginLeft: theme.spacing(5),
+        marginRight: theme.spacing(5)
+    }
 }));
 
 
 export default function Dashboard() {
     const classes = useStyles();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight, classes.crossfoottable);
 
     return (
         <>
@@ -101,7 +105,7 @@ export default function Dashboard() {
             </Grid>
 
             {/* *** Provider Summary Table *** */}
-            <Grid container className={classes.container} spacing={10}>
+            <Grid container className={classes.container} spacing={3}>
                 <Grid item xs={6}>
                     <Paper className={fixedHeightPaper}>
                         Provider Table goes here

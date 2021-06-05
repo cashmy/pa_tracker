@@ -169,7 +169,9 @@ export default function ProviderTable() {
                                     <TableCell>{item.statusName}</TableCell>
                                     <TableCell>{item.statusColor}</TableCell>
                                     <TableCell>{item.statusTextColor}</TableCell>
-                                    <TableCell>{item.displayOnSummary}</TableCell>
+                                    <TableCell>{item.displayOnSummary && 'Y'}
+                                               {!item.displayOnSummary && 'N'} 
+                                    </TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"

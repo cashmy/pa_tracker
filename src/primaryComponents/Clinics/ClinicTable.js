@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
-import ServiceLayer from '../../services/ServiceLayer';
+import ClinicService from '../../services/clinic.service';
 import PageHeader from '../../components/PageHeader/PageHeader';
 import { ReactComponent as ClinicIcon } from '../../assets/svg_icons/clinic.svg'
 import Controls from '../../components/controls/Controls';
@@ -56,8 +56,9 @@ export default function ClinicTable() {
 
     async function getClinics(e) {
         try {
-            const response = await ServiceLayer.getAllClinics();
+            const response = await ClinicService.getAllClinics();
             setRecords(response.data);
+            setLoadData(false)
         }
         catch (e) {
             console.log('API call unsuccessful', e)
@@ -92,11 +93,11 @@ export default function ClinicTable() {
     const addOrEdit = (clinic, resetForm) => {
         console.log("Clinic id: ", clinic.clinicId)
         if (clinic.clinicId === 0) {
-            ServiceLayer.addClinic(clinic)
+            ClinicService.addClinic(clinic)
             setLoadData(true); // Request reload of data
         }
         else {
-            ServiceLayer.updateClinic(clinic) 
+            ClinicService.updateClinic(clinic) 
             setLoadData(true); // Request reload of data
         }
         resetForm()
@@ -119,7 +120,7 @@ export default function ClinicTable() {
             ...confirmDialog,
             isOpen: false,
         })
-        ServiceLayer.deleteClinic(id)
+        ClinicService.deleteClinic(id)
         setLoadData(true);
         setNotify({
             isOpen: true,
