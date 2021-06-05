@@ -76,7 +76,7 @@ export default function SignInSide() {
         const jwt = localStorage.getItem('token');
         const userInfo = jwtDecode(jwt);
         setUser(userInfo);
-        window.location.href='/Drawer';
+        window.location.href='/dashboard';
       }
       else{
         console.log('User token is undefined.')

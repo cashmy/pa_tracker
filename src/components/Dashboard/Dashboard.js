@@ -1,8 +1,11 @@
 import React from 'react'
 import clsx from 'clsx';
-import { Grid, Paper, makeStyles } from '@material-ui/core';
+import { Grid, Paper, Typography, makeStyles } from '@material-ui/core';
 import Control from '../controls/Controls';
 import EditIcon from '@material-ui/icons/Edit';
+
+import PAProvCountSmry from '../../priorAuthComponents/PriorAuths/PAProvCountSmry'
+import PACarrCountSmry from '../../priorAuthComponents/PriorAuths/PACarrCountSmry'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -108,12 +111,16 @@ export default function Dashboard() {
             <Grid container className={classes.container} spacing={3}>
                 <Grid item xs={6}>
                     <Paper className={fixedHeightPaper}>
-                        Provider Table goes here
+                        <Typography variant="h6" gutterBottom
+                        > PA's Needing work by PROVIDER</Typography>
+                        <PAProvCountSmry />
                     </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <Paper className={fixedHeightPaper}>
-                        Carrier Table goes here
+                        <Typography variant="h6" gutterBottom
+                        > PA's Needing Work by CARRIER</Typography>
+                        <PACarrCountSmry />
                     </Paper>
                 </Grid>
             </Grid>
