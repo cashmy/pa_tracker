@@ -1,14 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2021-06-07T13:41:51.797Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" etag="dxWnFFoG2CDEQIA58DLp" version="14.7.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-06-07T13:43:16.424Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36" etag="gvFzM62vEBR_1YMrTVqR" version="14.7.4" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
-    <mxGraphModel dx="1422" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1185" dy="667" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-1" value="New Patient" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.cloud_rect" vertex="1" parent="1">
           <mxGeometry x="365" y="40" width="120" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-2" value="" style="aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.document" vertex="1" parent="1">
-          <mxGeometry x="445" y="235" width="40" height="50" as="geometry" />
         </mxCell>
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-3" value="" style="aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.document" vertex="1" parent="1">
           <mxGeometry x="445" y="360" width="40" height="50" as="geometry" />
@@ -17,7 +14,7 @@
           <mxGeometry x="445" y="460" width="40" height="50" as="geometry" />
         </mxCell>
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-5" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.document;" vertex="1" parent="1">
-          <mxGeometry x="649.5" y="260" width="21" height="30" as="geometry" />
+          <mxGeometry x="447.25" y="237.5" width="35.5" height="45" as="geometry" />
         </mxCell>
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-6" value="Primary Care&lt;br&gt;Physicians&lt;br&gt;Referral" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="515" y="250" width="40" height="20" as="geometry" />
@@ -34,15 +31,15 @@
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-10" value="Referral&lt;br&gt;(?)" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="250" y="220" width="80" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-11" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="uBWSTuV5O3R-H1wbQ9qK-10" target="uBWSTuV5O3R-H1wbQ9qK-2">
+        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-11" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="uBWSTuV5O3R-H1wbQ9qK-10">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="105" y="270" as="sourcePoint" />
-            <mxPoint x="155" y="220" as="targetPoint" />
+            <mxPoint x="445" y="260" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-12" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="uBWSTuV5O3R-H1wbQ9qK-2">
+        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-12" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="395" y="340" as="sourcePoint" />
+            <mxPoint x="465" y="285" as="sourcePoint" />
             <mxPoint x="295" y="320" as="targetPoint" />
             <Array as="points">
               <mxPoint x="465" y="320" />
@@ -95,12 +92,6 @@
         </mxCell>
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-21" value="Approved" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="250" y="770" width="80" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-22" value="" style="aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.document" vertex="1" parent="1">
-          <mxGeometry x="445" y="560" width="40" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-23" value="" style="aspect=fixed;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#00188D;shape=mxgraph.mscae.enterprise.document" vertex="1" parent="1">
-          <mxGeometry x="445" y="670" width="40" height="50" as="geometry" />
         </mxCell>
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-24" value="Provider&lt;br&gt;Review" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="515" y="670" width="40" height="20" as="geometry" />
@@ -174,9 +165,9 @@
             <mxPoint x="445" y="590" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-41" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="uBWSTuV5O3R-H1wbQ9qK-22">
+        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-41" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="350" y="660" as="sourcePoint" />
+            <mxPoint x="465" y="610.0000000000001" as="sourcePoint" />
             <mxPoint x="290" y="640" as="targetPoint" />
             <Array as="points">
               <mxPoint x="465" y="640" />
@@ -213,6 +204,12 @@
         </mxCell>
         <mxCell id="uBWSTuV5O3R-H1wbQ9qK-47" value="&lt;b&gt;&lt;i&gt;Timing:&lt;br&gt;&lt;/i&gt;&lt;/b&gt;&lt;br&gt;minutes&lt;br&gt;upto&lt;br&gt;2+&lt;br&gt;Weeks" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="110" y="585" width="40" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-48" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.document;" vertex="1" parent="1">
+          <mxGeometry x="445" y="565" width="35.5" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="uBWSTuV5O3R-H1wbQ9qK-49" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.document;" vertex="1" parent="1">
+          <mxGeometry x="445" y="677.5" width="35.5" height="45" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
