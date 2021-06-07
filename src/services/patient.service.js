@@ -8,6 +8,23 @@ class PatientService {
     return axios.get(API_URL, { headers: authHeader() });
   };
 
+  getAllPatientsSelect = () => {
+    axios
+      .get(API_URL, { headers: authHeader() })
+      .then((response) => {
+        let items = response.data
+        // let newItem = {}
+        let mapResults =[]
+        mapResults = items.map((item, i) => {
+          item.id = item.patientId
+          item.title = item.patientLastName + ', ' + item.patientFirstName
+          return item;
+        })
+        console.log("Service layer: ", mapResults)
+        return mapResults
+      });
+  };
+
   getPatient = (id) => {
     return axios.get(API_URL + `/${id}`, { headers: authHeader() });
   };
@@ -20,10 +37,6 @@ class PatientService {
     axios
         .put(API_URL + `/${data.patientId}`, data, { headers: authHeader() })
         .then((response) => {
-            if (response.data) {
-                console.log("Response: ", response.data)
-            }
-
             return response.data;
         });
   };
