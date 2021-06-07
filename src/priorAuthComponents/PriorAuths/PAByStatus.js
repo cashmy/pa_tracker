@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import {
     Fab,
     FormControlLabel,
@@ -21,14 +23,13 @@ import SearchIcon from '@material-ui/icons/Search';
 import { ReactComponent as ProviderIcon } from '../../assets/svg_icons/provider.svg'
 // Wrapped Components
 import Controls from '../../components/controls/Controls';
-import PageHeaderBgClr from '../../components/PageHeader/PageHeader';
+import PageHeaderBgClr from '../../components/PageHeader/PageHeaderBgClr';
 import useTable from "../../components/useTable"
 // Service Layer
 import PriorAuthService from '../../services/priorAuth.service';
 import StatusService from '../../services/status.service';
 // Primary CRUD Child Component
-// import PriorAuthForm from '../../primaryComponents/Providers/ProviderForm';
-
+import PriorAuthForm from '../../priorAuthComponents/PriorAuths/PriorAuthForm';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -59,9 +60,12 @@ const columnCells = [
     { id: 'actions', label: 'Actions', disableSorting: true },
 ]
 
-export default function ProviderTable(props) {
+export default function PAByStatus() {
 
-    const { workingStatusId } = props
+    
+    const location = useLocation()
+    const { workingStatusId } = location.state
+    
     const [statusTitle, setStatusTitle] = useState("")
     const [statusBackgroundColor, setStatusBackgroundColor] = useState("")
     const [statusTextColor, setStatusTextColor] = useState("")
@@ -77,8 +81,8 @@ export default function ProviderTable(props) {
     const [confirmDialog, setConfirmDialog] = useState({isOpen:false, title:'', subTitle:''})
 
     useEffect(() => {
-        getStatus(1)
-    },[props])
+        getStatus()
+    },[workingStatusId])
 
     useEffect(() => {
         getPAs()
@@ -86,7 +90,7 @@ export default function ProviderTable(props) {
         
     async function getPAs() {
         try {
-            const response = await PriorAuthService.getAllPAsbyStsAndArchive(1, archiveStatus);
+            const response = await PriorAuthService.getAllPAsbyStsAndArchive(workingStatusId, archiveStatus);
             setRecords(response.data);
             console.log(response.data)
             setLoadData(false)
@@ -98,10 +102,13 @@ export default function ProviderTable(props) {
     
     async function getStatus() {
         try {
-            const response = await StatusService.getStatus(1);
+            const response = await StatusService.getStatus(workingStatusId);
             setStatusTitle(response.data.statusName)
             setStatusBackgroundColor(response.data.statusColor)
             setStatusTextColor(response.data.statusTextColor)
+            console.log("Bckg: ", statusBackgroundColor)
+            console.log("Text: ", statusTextColor)
+            console.log(response.data)
         }
         catch (e) {
             console.log('API call unsuccessful', e)
@@ -192,8 +199,8 @@ export default function ProviderTable(props) {
                 subtitle="List of all PA's for a given status. ----- (Use switch to toggle between active and archived.)"
                 icon={<ProviderIcon />}
                 isSvg={true}
-                BackgroundColor={statusBackgroundColor}
-                textcolor={statusTextColor}
+                backgroundColor={statusBackgroundColor}
+                color={statusTextColor}
             />
 
             <Paper className={classes.pageContent}>
@@ -280,10 +287,10 @@ export default function ProviderTable(props) {
                 setOpenPopup = {setOpenPopup}
                 title="Prior Authorization Form"
             >
-                {/* <ProviderForm 
+                <PriorAuthForm 
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit}
-                /> */}
+                />
             </Controls.Popup>
             <Controls.Notification
                 notify={notify}
