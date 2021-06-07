@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { Grid, Paper, Typography, makeStyles } from '@material-ui/core';
 import Control from '../controls/Controls';
@@ -35,6 +36,17 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight, classes.crossfoottable);
+    const history = useHistory();
+
+    const handleOnClickRouting = (id) => {
+        console.log("id: ", id)
+        history.push({
+            pathname: '/priorAuthStatus',
+            state: {
+                workingStatusId: id
+            }
+        })
+    }
 
     return (
         <>
@@ -50,7 +62,7 @@ export default function Dashboard() {
                             backgroundColor="red"
                             textColor="white"
                             buttonColor="default"
-                            // onClick={handleOnClickRouting}
+                            onClick={() => { handleOnClickRouting(3) }}
                             children={<EditIcon />}
                         />
                      </Grid>
@@ -62,7 +74,7 @@ export default function Dashboard() {
                             backgroundColor="yellow"
                             textColor="black"
                             buttonColor="default"
-                            // onClick={handleOnClickRouting}
+                             onClick={() => { handleOnClickRouting(2) }}
                             children={<EditIcon />}
                             />
                     </Grid>
@@ -74,7 +86,7 @@ export default function Dashboard() {
                             backgroundColor="Green"
                             textColor="White"
                             buttonColor="default"
-                            // onClick={handleOnClickRouting}
+                              onClick={() => { handleOnClickRouting(1) }}
                             children={<EditIcon />}
                             />
                 </Grid>
@@ -88,7 +100,7 @@ export default function Dashboard() {
                             backgroundColor="Purple"
                             textColor="White"
                             buttonColor="default"
-                            // onClick={handleOnClickRouting}
+                              onClick={() => { handleOnClickRouting(5) }}
                             children={<EditIcon />}
                             />
                     </Grid>
@@ -100,7 +112,7 @@ export default function Dashboard() {
                             backgroundColor="Blue"
                             textColor="White"
                             buttonColor="default"
-                            // onClick={handleOnClickRouting}
+                            onClick={() => { handleOnClickRouting(4) }}
                             children={<EditIcon />}
                             />
                     </Grid>

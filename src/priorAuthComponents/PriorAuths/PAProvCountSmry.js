@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 import { IconButton, Paper, makeStyles } from '@material-ui/core';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -19,13 +20,17 @@ const useStyles = makeStyles((theme) => ({
   }
 ))
 
-// ***** Event Handlers *****
-const handleClickRow = (id) => {
-  alert(`Clicked on Row for : ${id}`)
-  
-}
+export default function PAProvCountSmry() {
+    const history = useHistory();
+    const classes = useStyles();
+    const [loadData, setLoadData] = useState(true)
+    const [records, setRecords] = useState([])
 
-const columns = [
+    useEffect(() => {
+        getProvCounts();
+    }, [loadData])
+    
+    const columns = [
     { field: 'id', headerName: 'ID', width: 90, hide: true },
     { field: 'providerLastName', headerName: 'Last name', width: 150 },
     { field: 'providerFirstName', headerName: 'First name', width: 150 },
@@ -48,16 +53,7 @@ const columns = [
     }
 ];
 
-export default function PAProvCountSmry() {
 
-    const classes = useStyles();
-    const [loadData, setLoadData] = useState(true)
-    const [records, setRecords] = useState([])
-
-    useEffect(() => {
-        getProvCounts();
-    }, [loadData])
-    
     async function getProvCounts() {
         try {
             const response = await PriorAuthService.getNonApprvdCountForProviders();
@@ -80,6 +76,16 @@ export default function PAProvCountSmry() {
         return mapResult
     }
     
+    const handleClickRow = (id) => {
+    history.push({
+        pathname: '/priorAuthProvider',
+        state: {
+             workingProviderId: id
+        }
+        })
+  
+    }
+
     return (
         <>
             <Paper className={classes.pageContent}>

@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
 import { IconButton, Paper, makeStyles } from '@material-ui/core';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -19,12 +20,16 @@ const useStyles = makeStyles((theme) => ({
   }
 ))
 
-// ***** Event Handlers *****
-const handleClickRow = (id) => {
-  alert(`Clicked on Row for : ${id}`)
-  
-}
+export default function PACarrCountSmry() {
+    const history = useHistory();
+    const classes = useStyles();
+    const [loadData, setLoadData] = useState(true)
+    const [records, setRecords] = useState([])
 
+    useEffect(() => {
+        getCarrCounts();
+    }, [loadData])
+    
 const columns = [
     { field: 'id', headerName: 'ID', width: 90, hide: true },
     { field: 'carrierName', headerName: 'Carrier', width: 150 },
@@ -38,7 +43,7 @@ const columns = [
             <div>
                 <IconButton
                     aria-label="edit"
-                    onClick={() => handleClickRow(params.row.paProviderId)}
+                    onClick={() => handleClickRow(params.row.paCarrierId)}
                     color="primary"
                 >
                     <PublishIcon />
@@ -48,16 +53,6 @@ const columns = [
     }
 ];
 
-export default function PACarrCountSmry() {
-
-    const classes = useStyles();
-    const [loadData, setLoadData] = useState(true)
-    const [records, setRecords] = useState([])
-
-    useEffect(() => {
-        getCarrCounts();
-    }, [loadData])
-    
     async function getCarrCounts() {
         try {
             const response = await PriorAuthService.getNonApprvdCountForCarriers();
@@ -80,6 +75,15 @@ export default function PACarrCountSmry() {
         return mapResult
     }
     
+    const handleClickRow = (id) => {
+        history.push({
+            pathname: '/priorAuthCarrier',
+            state: {
+                workingCarrierId: id
+            }
+        })
+    }
+        
     return (
         <>
             <Paper className={classes.pageContent}>

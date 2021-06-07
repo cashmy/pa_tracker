@@ -12,6 +12,14 @@ class ProviderService {
     return axios.get(API_URL + `/archive/${archiveStatus}`, { headers: authHeader() });
   };
 
+  getAllPAsbyCarrierAndArchive = (id, archiveStatus) => {
+    return axios.get(API_URL + `/carrier/${id}/archive/${archiveStatus}`, { headers: authHeader() });
+  }
+
+  getAllPAsbyProviderAndArchive = (id, archiveStatus) => {
+    return axios.get(API_URL + `/provider/${id}/archive/${archiveStatus}`, { headers: authHeader() });
+  }
+
   getAllPAsbyStsAndArchive = (id, archiveStatus) => {
     return axios.get(API_URL + `/status/${id}/archive/${archiveStatus}`, { headers: authHeader() });
   }
