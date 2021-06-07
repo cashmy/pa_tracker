@@ -25,9 +25,8 @@ import PageHeader from '../../components/PageHeader/PageHeader';
 import useTable from "../../components/useTable"
 // Service Layer
 import PriorAuthService from '../../services/priorAuth.service';
-import StatusService from '../../services/status.service';
 // Primary CRUD Child Component
-import PriorAuthForm from '../../primaryComponents/Providers/ProviderForm';
+import PriorAuthForm from '../../priorAuthComponents/PriorAuths/PriorAuthForm';
 
 
 
@@ -221,7 +220,13 @@ export default function ProviderTable() {
                                     <TableCell>{item.carrier.carrierShortName}</TableCell>
                                     <TableCell>{item.provider.providerLastName }</TableCell>
                                     <TableCell>{item.paTreatmentCode }</TableCell>
-                                    <TableCell>{item.status.statusName }</TableCell>
+                                    <TableCell><Controls.Chip label={item.status.statusName}
+                                    /></TableCell>
+                                    {/* <TableCell>{
+                                                Intl.DateTimeFormat('en-US',{
+                                                year: 'numeric',
+                                                month: 'short',
+                                                day: '2-digit' }).format(Date(item.paRequestDate))}</TableCell>; */}
                                     <TableCell>{item.paRequestDate}</TableCell>
                                     <TableCell>{item.paLastPOCDate}</TableCell>
                                     <TableCell>
@@ -262,10 +267,10 @@ export default function ProviderTable() {
                 setOpenPopup = {setOpenPopup}
                 title="Prior Authorization Form"
             >
-                {/* <ProviderForm 
+                <PriorAuthForm 
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit}
-                /> */}
+                />
             </Controls.Popup>
             <Controls.Notification
                 notify={notify}

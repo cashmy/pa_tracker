@@ -116,7 +116,7 @@ const columns  = [
     renderCell: (params) => (
       <div>
       <IconButton
-        aria-label="delete"
+        aria-label="edit"
         onClick={() => handleEditRow(params.row.id)}
         color="primary"
       >
