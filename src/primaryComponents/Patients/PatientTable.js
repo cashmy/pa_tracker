@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { DataGrid, GridToolbar } from '@material-ui/data-grid';
-import { IconButton, InputAdornment, Paper, makeStyles, Fab } from '@material-ui/core';
+import { IconButton, Paper, makeStyles, Fab } from '@material-ui/core';
 // Icons
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';

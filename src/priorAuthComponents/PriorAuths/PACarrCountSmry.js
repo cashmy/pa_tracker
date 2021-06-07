@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { DataGrid, GridToolbar } from '@material-ui/data-grid';
+import { DataGrid } from '@material-ui/data-grid';
 import { IconButton, Paper, makeStyles } from '@material-ui/core';
 import PublishIcon from '@material-ui/icons/Publish';
 
