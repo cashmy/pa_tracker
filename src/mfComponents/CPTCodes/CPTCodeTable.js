@@ -203,7 +203,7 @@ export default function CPTCodeTable() {
             <Controls.Popup
                 openPopup = {openPopup}
                 setOpenPopup = {setOpenPopup}
-                title="Place Of Service Form"
+                title="CPT Code Form"
             >
                 <CPTCodeForm 
                     recordForEdit={recordForEdit}
