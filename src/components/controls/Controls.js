@@ -1,4 +1,5 @@
 import ActionButton from './ActionButton'
+import Chip from './Chip'
 import Button from './Button'
 import Checkbox from './Checkbox'
 import ConfirmDialog from './ConfirmDialog'
@@ -12,6 +13,7 @@ import StatusCard from './StatusCard'
 
 const Controls = {
     ActionButton,
+    Chip,
     Button,
     Checkbox,
     ConfirmDialog,
