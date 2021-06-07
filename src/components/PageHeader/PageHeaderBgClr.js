@@ -25,17 +25,17 @@ const useStyles = makeStyles((theme) => ({
           '& .MuiTypography-subtitle2': {
               opacity: '0.6'
           }
-      },
+    }
 }));
 
 export default function PageHeaderBgClr(props) {
     
-    const {title, subtitle, icon, fontSize, isSvg=false, textColor, backgroundColor} = props
+    const {title, subtitle, icon, fontSize, isSvg=false, color, backgroundColor} = props
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <Paper elevation={3} style={{ backgroundColor}}> 
+            <Paper elevation={3} style={{ backgroundColor, color }}>
                 <Grid container className={classes.pageHeader} >
                         {/* <Grid item className={classes.pageIcon}>
                             {icon}
