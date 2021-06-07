@@ -31,7 +31,7 @@ export default function ProviderForm(props) {
         if ('carrierShortName' in fieldValues)
             temp.carrierShortName = fieldValues.carrierShortName ? "" : "This field is required."        
         if ('carrierShortName' in fieldValues && temp.carrierShortName === "")    
-            temp.carrierShortName = fieldValues.carrierShortName.length < 6 ? "" : "Maximum length of 6 characters required"
+            temp.carrierShortName = fieldValues.carrierShortName.length < 7 ? "" : "Maximum length of 6 characters required"
         
         if ('carrierContactEmail' in fieldValues)
             temp.carrierContactEmail = (/$^|.+@.+..+/).test(fieldValues.carrierContactEmail) ? "" : "Email is not a valid format."
@@ -63,7 +63,7 @@ export default function ProviderForm(props) {
     // SaveSubmit Callback handler - event driven
     const handleSubmit = (event) => {
         event.preventDefault();
-        if(validate())
+        if (validate())
             addOrEdit(values, resetForm);
     };
 
@@ -126,12 +126,13 @@ export default function ProviderForm(props) {
                         error={errors.carrierProviderPhone}
                     />
                     <Controls.Select
-                        name="patientClass"
+                        name="carrierClass"
                         label="Financial Class"
-                        value={values.patientClass}
+                        value={values.carrierClass ? values.carrierClass : ""}
+
                         onChange={handleInputChange}
                         options = {ServiceLayer.getAllFinancialClasses() }
-                        error={errors.patientClass}
+                        error={errors.carrierClass}
                     />
                     <Controls.Checkbox 
                         name="carrierPARequired"
