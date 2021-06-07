@@ -52,9 +52,9 @@ export default function SignInSide() {
     username: '',
     email: '',
     password: '',
-    phoneNumber: '',
-    isSupplier: false,
-    currencyCode: "USD"
+    // phoneNumber: '',
+    // isSupplier: false,
+    // currencyCode: "USD"
   });
 
   async function handleSubmit(event){
@@ -65,9 +65,9 @@ export default function SignInSide() {
       username: user.username,
       password: user.password,
       email: user.email,
-      phoneNumber: user.phoneNumber,
-      currencyCode: user.currencyCode,
-      isSupplier: user.isSupplier,
+      // phoneNumber: user.phoneNumber,
+      // currencyCode: user.currencyCode,
+      // isSupplier: user.isSupplier,
     }
     try{
       const response = await serviceLayer.registerUser(data);
@@ -78,9 +78,9 @@ export default function SignInSide() {
         username: data.username,
         password: data.password,
         email: data.email,
-        phoneNumber: data.phoneNumber,
-        currencyCode: data.currencyCode,
-        isSupplier: data.isSupplier,
+        // phoneNumber: data.phoneNumber,
+        // currencyCode: data.currencyCode,
+        // isSupplier: data.isSupplier,
       });
 
       if(response.data.token !== null){
@@ -94,11 +94,11 @@ export default function SignInSide() {
 
   }
 
-  const onChangePhoneNumber = (e) => {
-    setUser({
-      ...user, phoneNumber: e.target.value
-    })
-  }
+  // const onChangePhoneNumber = (e) => {
+  //   setUser({
+  //     ...user, phoneNumber: e.target.value
+  //   })
+  // }
 
   const onChangeFirstName = (e) => {
     setUser({
@@ -219,7 +219,7 @@ export default function SignInSide() {
                     autoComplete="email"
                   />
                   </Grid>
-                <Grid item xs={6}>
+                {/* <Grid item xs={6}>
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -232,7 +232,7 @@ export default function SignInSide() {
                     onChange={onChangePhoneNumber}
                     autoComplete="phoneNumber"
                   />
-                </Grid>
+                </Grid> */}
             </Grid>
 
             <Button
