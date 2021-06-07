@@ -5,7 +5,6 @@ import { FormControl, FormHelperText, InputLabel, MenuItem, Select as MuiSelect}
 const Select = (props) => {
     const { name, label, value, error=null, onChange, options } = props
 
-
     return (
         <FormControl variant='outlined' fullWidth
         {...(error && {error:true})}
@@ -16,7 +15,7 @@ const Select = (props) => {
                 name={name}
                 value={value}
                 onChange={onChange}
- 
+                fullWidth
             >
                 <MenuItem value="">None</MenuItem>
                 {
