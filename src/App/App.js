@@ -1,7 +1,5 @@
 // React 
 import React, { useState, useEffect } from 'react';
-// import { useSelector } from 'react-redux'; // for function components
-// import { connect } from 'react-redux'; // for class based components
 
 // Styling
 import clsx from 'clsx';
@@ -24,6 +22,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Image from '../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 // Main Routing and Navigaion
 import { Switch, Route, Redirect, Link as RouterLink, NavLink } from 'react-router-dom';
@@ -85,6 +84,12 @@ import PAByProvider from '../priorAuthComponents/PriorAuths/PAByProvider'
 import PATable from '../priorAuthComponents/PriorAuths/PATable'
 
 const drawerWidth = 240;
+
+const theme = createMuiTheme({
+  palette: {
+    type: "light"
+  }
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -233,6 +238,7 @@ export default function App() {
 
 
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <CssBaseline />
 {/* AppBar */}
@@ -499,7 +505,8 @@ export default function App() {
         {/* <Footer /> */}
         </Paper>
       </main>
-    </div>
+      </div>
+      </ThemeProvider>
     );
 }
 
