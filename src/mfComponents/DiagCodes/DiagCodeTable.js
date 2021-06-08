@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import { InputAdornment, Paper, makeStyles, Fab, TableBody, TableRow, TableCell, Toolbar } from '@material-ui/core';
 // Icons
 import AddIcon from '@material-ui/icons/Add';
@@ -15,6 +16,9 @@ import DiagCodeService from '../../services/diagCode.service';
 // Primary CRUD Child Component
 import DiagCodeForm from './DiagCodeForm';
 
+import { PDFViewer } from '@react-pdf/renderer';
+import DiagReport from './DiagReport';
+
 
 const useStyles = makeStyles((theme) => ({
     pageContent: {
@@ -29,7 +33,10 @@ const useStyles = makeStyles((theme) => ({
     },
     addButton: {
         position: 'absolute',
-        right: '10px',
+        right: theme.spacing(1.5),
+    },
+    reportButton: {
+        marginLeft: theme.spacing(3)
     }
 }))
 
@@ -89,6 +96,16 @@ export default function ProviderTable() {
                     ))
             }
         })
+    }
+
+    const ReportApp = () => (
+        <PDFViewer width="100%" height="1200">
+            <DiagReport />
+        </PDFViewer>
+    );
+    
+    const handleReport = e => {
+        ReactDOM.render(<ReportApp />, document.getElementById('root'));
     }
 
     const addOrEdit = (diagCode, resetForm) => {
@@ -153,6 +170,15 @@ export default function ProviderTable() {
                         onChange={handleSearch}
                     />
                     {/* <Switch></Switch> */}
+                    <Controls.Button 
+                        className={classes.reportButton}
+                        text="Report"
+                        color="primary" 
+                        aria-label="report"
+                        size="small"
+                        onClick={handleReport}
+                        >
+                    </Controls.Button>
                     <Fab 
                         className={classes.addButton}
                         color="secondary" 
@@ -161,7 +187,7 @@ export default function ProviderTable() {
                         onClick={() => { setOpenPopup(true); setRecordForEdit(null); setMode("ADD");}}
                         >
                         <AddIcon />
-                    </Fab>   
+                    </Fab>
                 </Toolbar>
                 <TblContainer>
                     <TblHead />
