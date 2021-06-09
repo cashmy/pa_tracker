@@ -244,6 +244,7 @@ export default function PAByProvider() {
                                     <TableCell>{item.paTreatmentCode }</TableCell>
                                     <TableCell>{item.paRequestDate}</TableCell>
                                     <TableCell>{item.paLastPOCDate}</TableCell>
+                                    <TableCell>{item.paLastEvalDate}</TableCell>
                                     <TableCell>
                                         <Controls.ActionButton
                                             color="primary"
