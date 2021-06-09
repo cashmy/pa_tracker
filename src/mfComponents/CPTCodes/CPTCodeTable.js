@@ -14,6 +14,10 @@ import useTable from "../../components/useTable"
 import CPTCodeService from '../../services/cptCode.service';
 // Primary CRUD Child Component
 import CPTCodeForm from './CPTCodeForm';
+// Report Items
+import ReactDOM from 'react-dom';
+import { PDFViewer } from '@react-pdf/renderer';
+import CPTCodeReport from './CPTCodeReport';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +33,10 @@ const useStyles = makeStyles((theme) => ({
     },
     addButton: {
         position: 'absolute',
-        right: '10px',
+        right: theme.spacing(1.5),
+    },
+    reportButton: {
+        marginLeft: theme.spacing(3)
     }
 }))
 
@@ -91,6 +98,15 @@ export default function CPTCodeTable() {
         })
     }
 
+    const ReportApp = () => (
+        <PDFViewer width="100%" height="1200">
+            <CPTCodeReport />
+        </PDFViewer>
+    );
+    
+    const handleReport = e => {
+        ReactDOM.render(<ReportApp />, document.getElementById('root'));
+    }
     const addOrEdit = (cptCode, resetForm) => {
         if (mode === "ADD") {
             CPTCodeService.addCPTCode(cptCode)
@@ -153,7 +169,16 @@ export default function CPTCodeTable() {
                         onChange={handleSearch}
                     />
                     {/* <Switch></Switch> */}
-                    <Fab 
+                    <Controls.Button 
+                        className={classes.reportButton}
+                        text="Report"
+                        color="primary" 
+                        aria-label="report"
+                        size="small"
+                        onClick={handleReport}
+                        >
+                    </Controls.Button>
+                    <Fab
                         className={classes.addButton}
                         color="secondary" 
                         aria-label="add"

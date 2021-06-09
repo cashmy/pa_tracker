@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { InputAdornment, Paper, makeStyles, Fab, TableBody, TableRow, TableCell, Toolbar } from '@material-ui/core';
 // Icons
 import AddIcon from '@material-ui/icons/Add';
@@ -15,7 +14,8 @@ import useTable from "../../components/useTable"
 import DiagCodeService from '../../services/diagCode.service';
 // Primary CRUD Child Component
 import DiagCodeForm from './DiagCodeForm';
-
+// Report Items
+import ReactDOM from 'react-dom';
 import { PDFViewer } from '@react-pdf/renderer';
 import DiagReport from './DiagReport';
 

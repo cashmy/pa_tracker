@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 // Service Layer
-import DiagCodeService from '../../services/diagCode.service';
+import CPTCodeService from '../../services/cptCode.service';
 
 // Create styles
 const styles = StyleSheet.create({
@@ -57,15 +57,15 @@ const styles = StyleSheet.create({
 
 
 // Create Document Component
-export default function DiagReport() {
-    const title = "Diagnosis Code Report";
-    const subTitle = "List of available ICD-10 Diagnosis Codes & Descriptions"
+export default function CPTCodeReport() {
+    const title = "CPT Code Report";
+    const subTitle = "List of available Current Procedural Terminology (CPT) Codes"
     const [records, setRecords] = useState([]);
     const [colHdgItems, setColHdgItems] = useState();
 
     const colHdgs = [
-        { field: 'id', headerName: 'Diag Code', width: 75 },
-        { field: 'diag', headerName: 'Diagnosis Description', width: 400 },
+        { field: 'cptCodeId', headerName: 'CPT Code', width: 75 },
+        { field: 'cptDescription', headerName: 'CPT Description', width: 400 },
     ];
 
     useEffect(() => {
@@ -83,12 +83,11 @@ export default function DiagReport() {
 
     async function getRecords() {
         try {
-            const response = await DiagCodeService.getAllDiagCodes();
+            const response = await CPTCodeService.getAllCPTCodes();
             setRecords(response.data);
-
         }
         catch (e) {
-            console.log('Diagnosis API call unsuccessful', e)
+            console.log('CPT API call unsuccessful', e)
         }
     }
     
@@ -112,8 +111,8 @@ export default function DiagReport() {
                             // Row data
                             return (
                                 <View key={index} style={styles.row}>
-                                    <Text style={[styles.text, { width: colHdgs[0].width }]} > {item.diagCode} </Text>
-                                    <Text style={[styles.text, { width: colHdgs[1].width }]} wrap > {item.diagDescription} </Text>
+                                    <Text style={[styles.text, { width: colHdgs[0].width }]} > {item.cptCodeId} </Text>
+                                    <Text style={[styles.text, { width: colHdgs[1].width }]} wrap > {item.cptDescription} </Text>
                                 </View>
                             )
                         })
