@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Grid } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { Grid, AppBar, Tabs, Tab, Box, Typography } from '@material-ui/core';
 import Controls from '../../components/controls/Controls';
 import { useForm, Form } from '../../components/useForm';
 import ServiceLayer from '../../services/ServiceLayer'; // Users
@@ -12,6 +13,39 @@ import PlaceOfService from '../../services/placeOfService.service';
 import ProviderService from '../../services/provider.service';
 import ClinicService from '../../services/clinic.service';
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      style={{ width: 880, height: 425 }}
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 const frequency = [
     { id: '1x/week', title: '1x/week' },
@@ -60,6 +94,12 @@ export default function PAForm(props) {
     const [selectProviders, setSelectProviders] = useState([])
     const [selectClinics, setSelectClinics] = useState([])
     const [selectUsers, setSelectUsers] = useState([])
+    const [value, setValue] = React.useState(0);
+
+    // Handle tab change
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
     
     useEffect(() => {
         getPatientsSelect()
@@ -240,167 +280,217 @@ export default function PAForm(props) {
 
     return(
         <Form>
-            <Grid container alignItems="flex-start" spacing={2}>
-                <Grid item xs={3}>
-                    <Controls.Select
-                        name="paPatientId"
-                        label="Patient Name"
-                        value={values.paPatientId ? values.paPatientId : ""}
-                        onChange={handleInputChange}
-                        options = {selectPatients }
-                        error={errors.paPatientId}
-                    />
-                    <Controls.Select
-                        name="paCarrierId"
-                        label="Carrier"
-                        value={values.paCarrierId ? values.paCarrierId : ""}
-                        onChange={handleInputChange}
-                        options = {selectCarriers }
-                        error={errors.paCarrierId}
-                    />
-                    <Controls.Select
-                        name="paStatus"
-                        label="Status"
-                        value={values.paStatus ? values.paStatus : ""}
-                        onChange={handleInputChange}
-                        options = {selectStatuses }
-                        error={errors.paStatus}
-                    />
-                    <Controls.Select
-                        name="paProviderId"
-                        label="Provider"
-                        value={values.paProviderId ? values.paProviderId : ""}
-                        onChange={handleInputChange}
-                        options = {selectProviders }
-                        error={errors.paProviderId}
-                    />
+            <AppBar position="static">
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="prior auth form tabs"
+                    variant="fullWidth"
+                >
+                    <Tab label="General" {...a11yProps(0)} />
+                    <Tab label="Diagnosis" {...a11yProps(1)} />
+                    <Tab label="CPT" {...a11yProps(2)} />
+                    <Tab label="Notes" {...a11yProps(3)} />
+                </Tabs>
+            </AppBar>
 
+            {/* General */}
+            <TabPanel value={value} index={0}>
+                <Grid container alignItems="flex-start" spacing={2}>
+
+                    <Grid item xs={3}>
+                        <Controls.Select
+                            name="paPatientId"
+                            label="Patient Name"
+                            value={values.paPatientId ? values.paPatientId : ""}
+                            onChange={handleInputChange}
+                            options = {selectPatients }
+                            error={errors.paPatientId}
+                        />
+                        <Controls.Select
+                            name="paCarrierId"
+                            label="Carrier"
+                            value={values.paCarrierId ? values.paCarrierId : ""}
+                            onChange={handleInputChange}
+                            options = {selectCarriers }
+                            error={errors.paCarrierId}
+                        />
+                        <Controls.Select
+                            name="paCarrierPosition"
+                            label="Carrier Position"
+                            value={values.paCarrierPosition ? values.paCarrierPosition : ""}
+                            onChange={handleInputChange}
+                            options = {carrPostion}
+                            error={errors.paCarrierPosition}
+                        />
+                        <Controls.Select
+                            name="paStatus"
+                            label="Status"
+                            value={values.paStatus ? values.paStatus : ""}
+                            onChange={handleInputChange}
+                            options = {selectStatuses }
+                            error={errors.paStatus}
+                        />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Controls.Select
+                            name="paProviderId"
+                            label="Provider"
+                            value={values.paProviderId ? values.paProviderId : ""}
+                            onChange={handleInputChange}
+                            options = {selectProviders }
+                            error={errors.paProviderId}
+                        />
+                        <Controls.Select
+                            name="paTreatmentCode"
+                            label="Specialty"
+                            value={values.paTreatmentCode ? values.paTreatmentCode : ""}
+                            onChange={handleInputChange}
+                            options = {selectSpecialties }
+                            error={errors.paTreatmentCode}
+                        />
+                        <Controls.Select
+                            name="paServiceCode"
+                            label="Service Location"
+                            value={values.paServiceCode ? values.paServiceCode : ""}
+                            onChange={handleInputChange}
+                            options = {selectPlacesOfService }
+                            error={errors.paServiceCode}
+                        />
+                        <Controls.Select
+                            name="paClinicId"
+                            label="Clinic"
+                            value={values.paClinicId ? values.paClinicId : ""}
+                            onChange={handleInputChange}
+                            options = {selectClinics }
+                            error={errors.paClinicId}
+                        />
+                    </Grid>
+                    <Grid item xs={3} >
+                        <Controls.DatePicker 
+                            name="paRequestDate"
+                            label="RequestDate"
+                            value={values.paRequestDate} 
+                            onChange={handleInputChange}
+                            error={errors.paRequestDate}
+                        />
+                        <Controls.Select
+                            name="paVisitFrequency"
+                            label="Visit Frequency"
+                            value={values.paVisitFrequency ? values.paVisitFrequency : ""}
+                            onChange={handleInputChange}
+                            options = {frequency}
+                            error={errors.paVisitFrequency}
+                        />
+                        <Controls.Input
+                            name="PARqstNmbrVisits" 
+                            label="Reqstd # Vistis"
+                            value={values.PARqstNmbrVisits}
+                            onChange={handleInputChange}
+                            error={errors.PARqstNmbrVisits}
+                        />
+                        <Controls.Input
+                            name="paAuthId" 
+                            variant="filled"
+                            label="Auth/Ref Number"
+                            value={values.paAuthId}
+                            onChange={handleInputChange}
+                            error={errors.paAuthId}
+                        />
+                    </Grid>
+                    <Grid item xs={3} >
+                        <Controls.DatePicker 
+                            name="paLastEvalDate"
+                            label="Last Eval Date"
+                            value={values.paLastEvalDate}
+                            onChange={handleInputChange}
+                            error={errors.paLastEvalDate}
+                        />
+                        <Controls.DatePicker 
+                            name="paLastPOCDate"
+                            label="Last POC Date"
+                            value={values.paLastPOCDate}
+                            onChange={handleInputChange}
+                            error={errors.paLastPOCDate}
+                        />
+                        <Controls.DatePicker 
+                            name="paStartDate"
+                            label="Start Date"
+                            value={values.paStartDate}
+                            onChange={handleInputChange}
+                            error={errors.paStartDate}
+                        />
+                        <Controls.DatePicker 
+                            name="paExpireDate"
+                            label="Est Expire Date"
+                            value={values.paExpireDate}
+                            onChange={handleInputChange}
+                            error={errors.paExpireDate}
+                        />
+                        <Controls.Select
+                            name="paAssignedStaff"
+                            label="Assigned User"
+                            value={values.paAssignedStaff ? values.paAssignedStaff : ""}
+                            onChange={handleInputChange}
+                            options = {selectUsers }
+                            error={errors.paAssignedStaff}
+                        />
+                    </Grid>
+                </Grid>        
+            </TabPanel>
+
+            {/* Diagnosis Tab */}
+            <TabPanel value={value} index={1}>
+                <Grid container alignItems="flex-start" spacing={2}> 
+                    <Grid item xs={12} styles={{ display: "flex" }}>
+                        <Controls.Input
+                            name="diagnosisCodes" 
+                            variant="filled"
+                            label="DiagnosisCodes"
+                            value={values.paDiagCode}
+                            onChange={handleInputChange}
+                            error={errors.paDiagCode}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item xs={3}>
-                    <Controls.Select
-                        name="paTreatmentCode"
-                        label="Specialty"
-                        value={values.paTreatmentCode ? values.paTreatmentCode : ""}
-                        onChange={handleInputChange}
-                        options = {selectSpecialties }
-                        error={errors.paTreatmentCode}
-                    />
-                   <Controls.Select
-                        name="paServiceCode"
-                        label="Service Location"
-                        value={values.paServiceCode ? values.paServiceCode : ""}
-                        onChange={handleInputChange}
-                        options = {selectPlacesOfService }
-                        error={errors.paServiceCode}
-                    />
-                    <Controls.Select
-                        name="paAssignedStaff"
-                        label="Assigned User"
-                        value={values.paAssignedStaff ? values.paAssignedStaff : ""}
-                        onChange={handleInputChange}
-                        options = {selectUsers }
-                        error={errors.paAssignedStaff}
-                    />
-                    <Controls.Select
-                        name="paClinicId"
-                        label="Clinic"
-                        value={values.paClinicId ? values.paClinicId : ""}
-                        onChange={handleInputChange}
-                        options = {selectClinics }
-                        error={errors.paClinicId}
-                    />
+            </TabPanel>
+
+            {/* CPT Codes Tab */}
+            <TabPanel value={value} index={2}>
+                <Grid container alignItems="flex-start" spacing={2}>            
+                    <Grid item xs={12} styles={{ display: "flex" }}>
+                            <Controls.Input
+                                name="cptCodes" 
+                                variant="filled"
+                                label="CPT Codes"
+                                value={values.paCPTCode}
+                                onChange={handleInputChange}
+                                error={errors.paCPTCode}
+                            />
+                     </Grid>
                 </Grid>
-                <Grid item xs={3} >
-                    <Controls.DatePicker 
-                        name="paRequestDate"
-                        label="RequestDate"
-                        value={values.paRequestDate} 
-                        onChange={handleInputChange}
-                        error={errors.paRequestDate}
-                    />
-                    <Controls.Select
-                        name="paVisitFrequency"
-                        label="Visit Frequency"
-                        value={values.paVisitFrequency ? values.paVisitFrequency : ""}
-                        onChange={handleInputChange}
-                        options = {frequency}
-                        error={errors.paVisitFrequency}
-                    />
-                    <Controls.Input
-                        name="PARqstNmbrVisits" 
-                        label="Reqstd # Vistis"
-                        value={values.PARqstNmbrVisits}
-                        onChange={handleInputChange}
-                        error={errors.PARqstNmbrVisits}
-                    />
-                    <Controls.Input
-                        name="paAuthId" 
-                        variant="filled"
-                        label="Auth/Ref Number"
-                        value={values.paAuthId}
-                        onChange={handleInputChange}
-                        error={errors.paAuthId}
-                    />
+            </TabPanel>
+
+            {/* Notes Tab */}
+            <TabPanel value={value} index={3}>
+                <Grid container alignItems="flex-start" spacing={2}>
+                    <Grid item xs={12} styles={{display: "flex"}}>
+                        <Controls.Input 
+                            name="patientNotes"
+                            label="Notes"
+                            fullWidth
+                            value={values.patientNotes}
+                            onChange={handleInputChange}
+                            multiline
+                            rowsMax={4}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item xs={3} >
-                    <Controls.DatePicker 
-                        name="paLastEvalDate"
-                        label="Last Eval Date"
-                        value={values.paLastEvalDate}
-                        onChange={handleInputChange}
-                        error={errors.paLastEvalDate}
-                    />
-                    <Controls.DatePicker 
-                        name="paLastPOCDate"
-                        label="Last POC Date"
-                        value={values.paLastPOCDate}
-                        onChange={handleInputChange}
-                        error={errors.paLastPOCDate}
-                    />
-                    <Controls.DatePicker 
-                        name="paStartDate"
-                        label="Start Date"
-                        value={values.paStartDate}
-                        onChange={handleInputChange}
-                        error={errors.paStartDate}
-                    />
-                    <Controls.DatePicker 
-                        name="paExpireDate"
-                        label="Est Expire Date"
-                        value={values.paExpireDate}
-                        onChange={handleInputChange}
-                        error={errors.paExpireDate}
-                    />
-                </Grid>
-                <Grid item xs={6} styles={{ display: "flex" }}>
-                    <Controls.Input
-                        name="diagnosisCodes" 
-                        variant="filled"
-                        label="DiagnosisCodes"
-                        value={values.paDiagCode}
-                        onChange={handleInputChange}
-                        error={errors.paDiagCode}
-                    />
-                </Grid>
-               <Grid item xs={6} styles={{ display: "flex" }}>
-                    <Controls.Input
-                        name="cptCodes" 
-                        variant="filled"
-                        label="CPT Codes"
-                        value={values.paCPTCode}
-                        onChange={handleInputChange}
-                        error={errors.paCPTCode}
-                    />
-                </Grid>
-                <Grid item xs={12} styles={{display: "flex"}}>
-                    <Controls.Input 
-                        name="patientNotes"
-                        label="Notes"
-                        value={values.patientNotes}
-                        onChange={handleInputChange}
-                        multiline
-                        rowsMax={4}
-                    />
+            </TabPanel>
+
+
+             <Grid container alignItems="flex-start" spacing={2}>
+                <Grid item xs={12} styles={{display: "flex"}}></Grid>
                     <div styles={{display: "flex"}}>
                         <Controls.Button 
                             type="submit"
@@ -414,7 +504,7 @@ export default function PAForm(props) {
                         />
                     </div>
                 </Grid>
-            </Grid>
+
         </Form>
     )
 }
