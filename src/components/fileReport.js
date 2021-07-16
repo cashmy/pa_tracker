@@ -94,7 +94,7 @@ export default function DiagReport(props) {
             )
         })
         console.log("Headings map: ", mapResult)
-        setColHdgItems(mapResult
+        setColHdgItems(mapResult)
 
     },[])
 

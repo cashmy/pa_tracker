@@ -1,41 +1,42 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom'
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Image from '../../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg';
-import serviceLayer from '../../services/ServiceLayer';
-
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Image from "../../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg";
+import serviceLayer from "../../services/ServiceLayer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
     backgroundImage: `url(${Image})`,
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     // marginTop: theme.spacing(1),
   },
   submit: {
@@ -47,17 +48,17 @@ export default function SignInSide() {
   const classes = useStyles();
 
   const [user, setUser] = useState({
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
     // phoneNumber: '',
     // isSupplier: false,
     // currencyCode: "USD"
   });
 
-  async function handleSubmit(event){
+  async function handleSubmit(event) {
     event.preventDefault();
     const data = {
       firstName: user.firstName,
@@ -68,8 +69,8 @@ export default function SignInSide() {
       // phoneNumber: user.phoneNumber,
       // currencyCode: user.currencyCode,
       // isSupplier: user.isSupplier,
-    }
-    try{
+    };
+    try {
       const response = await serviceLayer.registerUser(data);
       console.log(response);
       setUser({
@@ -83,15 +84,12 @@ export default function SignInSide() {
         // isSupplier: data.isSupplier,
       });
 
-      if(response.data.token !== null){
-        window.location.href='/login';
+      if (response.data.token !== null) {
+        window.location.href = "/login";
       }
-    } catch(ex){
-      console.log('Error in API call', ex.response.data);
+    } catch (ex) {
+      console.log("Error in API call", ex.response.data);
     }
-
-    
-
   }
 
   // const onChangePhoneNumber = (e) => {
@@ -102,35 +100,38 @@ export default function SignInSide() {
 
   const onChangeFirstName = (e) => {
     setUser({
-      ...user, firstName: e.target.value
-    })
-  }
+      ...user,
+      firstName: e.target.value,
+    });
+  };
 
   const onChangeLastName = (e) => {
     setUser({
-      ...user, lastName: e.target.value
-    })
-  }
+      ...user,
+      lastName: e.target.value,
+    });
+  };
 
   const onChangeEmail = (e) => {
     setUser({
-      ...user, email: e.target.value
-    })
-  }
+      ...user,
+      email: e.target.value,
+    });
+  };
 
   const onChangeUsername = (e) => {
     setUser({
-      ...user, username: e.target.value
-    })
-  }
+      ...user,
+      username: e.target.value,
+    });
+  };
 
   const onChangePassword = (e) => {
     setUser({
-      ...user, password: e.target.value
-    })
-  }
-  
-
+      ...user,
+      password: e.target.value,
+    });
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -145,81 +146,81 @@ export default function SignInSide() {
             Registration
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            <Grid container  spacing={2} className={classes.grid}>
+            <Grid container spacing={2} className={classes.grid}>
               <Grid item xs={6}>
                 <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="fname"
-                    label="First Name"
-                    name="fname"
-                    value={user.firstName}
-                    onChange={onChangeFirstName}
-                    autoComplete="fname"
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                    <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="lname"
-                    label="Last Name"
-                    name="lname"
-                    value={user.lastName}
-                    onChange={onChangeLastName}
-                    autoComplete="lname"
-                  />
-                </Grid>
-                <Grid item xs={6} >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="userName"
-                    label="UserName"
-                    name="userName"
-                    value={user.userName}
-                    onChange={onChangeUsername}
-                    autoComplete="userName"
-                  />
-                </Grid>
-                <Grid item xs={6} >
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    value={user.password}
-                    onChange={onChangePassword}
-                    autoComplete="current-password"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    type="email"
-                    id="email"
-                    label="Email"
-                    name="email"
-                    value={user.email}
-                    onChange={onChangeEmail}
-                    autoComplete="email"
-                  />
-                  </Grid>
-                {/* <Grid item xs={6}>
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="fname"
+                  label="First Name"
+                  name="fname"
+                  value={user.firstName}
+                  onChange={onChangeFirstName}
+                  autoComplete="fname"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="lname"
+                  label="Last Name"
+                  name="lname"
+                  value={user.lastName}
+                  onChange={onChangeLastName}
+                  autoComplete="lname"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="userName"
+                  label="UserName"
+                  name="userName"
+                  value={user.userName}
+                  onChange={onChangeUsername}
+                  autoComplete="userName"
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  value={user.password}
+                  onChange={onChangePassword}
+                  autoComplete="current-password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  type="email"
+                  id="email"
+                  label="Email"
+                  name="email"
+                  value={user.email}
+                  onChange={onChangeEmail}
+                  autoComplete="email"
+                />
+              </Grid>
+              {/* <Grid item xs={6}>
                   <TextField
                     variant="outlined"
                     margin="normal"
@@ -251,7 +252,7 @@ export default function SignInSide() {
                 </Link> */}
               </Grid>
               <Grid item>
-                <Link component={RouterLink} to={''} variant="body2">
+                <Link component={RouterLink} to={""} variant="body2">
                   {"Already have an account? Sign In"}
                 </Link>
               </Grid>

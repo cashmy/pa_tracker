@@ -49,7 +49,7 @@ export default function Dashboard() {
     }
 
     return (
-        <>
+        <React.Fragment>
             {/* *** Status Cards *** */}
             <Grid container className={classes.root} spacing={3}>
                 <Grid container className={classes.container} spacing={10}>
@@ -136,6 +136,6 @@ export default function Dashboard() {
                     </Paper>
                 </Grid>
             </Grid>
-        </>
+        </React.Fragment>
     )
 }

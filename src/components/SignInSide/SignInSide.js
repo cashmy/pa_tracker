@@ -1,45 +1,47 @@
-import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom'
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
 
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Image from '../../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg';
-import ServiceLayer from '../../services/ServiceLayer';
-import jwtDecode from 'jwt-decode';
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Image from "../../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg";
+import ServiceLayer from "../../services/ServiceLayer";
+import jwtDecode from "jwt-decode";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
     backgroundImage: `url(${Image})`,
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -51,54 +53,55 @@ export default function SignInSide() {
   const classes = useStyles();
 
   const [userLogin, setUserLogin] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
   const [user, setUser] = useState();
 
-  async function handleSubmit(event){
+  async function handleSubmit(event) {
     event.preventDefault();
     const data = {
       username: userLogin.username,
-      password: userLogin.password
-    }
-    try{
+      password: userLogin.password,
+    };
+    try {
       const response = await ServiceLayer.userLogin(data);
       console.log(response);
 
-      if(response.data.token !== null){
+      if (response.data.token !== null) {
         let token = response.data.token;
-        window.localStorage.setItem('token', token)
+        window.localStorage.setItem("token", token);
         setUserLogin({
           username: data.username,
           password: data.password,
         });
-        const jwt = localStorage.getItem('token');
+        const jwt = localStorage.getItem("token");
         const userInfo = jwtDecode(jwt);
         setUser(userInfo);
-        window.location.href='/dashboard';
+        window.location.href = "/dashboard";
+      } else {
+        console.log("User token is undefined.");
       }
-      else{
-        console.log('User token is undefined.')
-      }
-    } catch(ex){
-      console.log('** Ensure your server is running!! **')
-      console.log('Error in API call', ex);
-      alert("Incorrect Username or Password. Try again.")
+    } catch (ex) {
+      console.log("** Ensure your server is running!! **");
+      console.log("Error in API call", ex);
+      alert("Incorrect Username or Password. Try again.");
     }
   }
 
   const onChangeUsername = (e) => {
     setUserLogin({
-      ...userLogin, username: e.target.value
-    })
-  }
+      ...userLogin,
+      username: e.target.value,
+    });
+  };
 
   const onChangePassword = (e) => {
     setUserLogin({
-      ...userLogin, password: e.target.value
-    })
-  }
+      ...userLogin,
+      password: e.target.value,
+    });
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -159,7 +162,11 @@ export default function SignInSide() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link component={RouterLink} to={'registration'} variant="body2">
+                <Link
+                  component={RouterLink}
+                  to={"registration"}
+                  variant="body2"
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
