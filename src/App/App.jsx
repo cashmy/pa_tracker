@@ -27,19 +27,13 @@ import {
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 
 // Main Routing and Navigaion
-import {
-  Switch,
-  Route,
-  Redirect,
-  Link as RouterLink,
-  NavLink,
-} from "react-router-dom";
+import { Switch, Route, Redirect, Link as RouterLink } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 // import AppBar from '../components/AppBar/AppBar.js';
 import BackgroundImage from "../assets/images/national-cancer-institute-NFvdKIhxYlU-unsplash.jpg";
 // Menu Control Icons
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+// import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -192,7 +186,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
-  const dispatch = store.dispatch;
+  // const dispatch = store.dispatch;
 
   const classes = useStyles();
   const [user, setUser] = useState();
