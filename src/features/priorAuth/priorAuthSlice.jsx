@@ -1,12 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import authHeader from "../../services/authHeader";
+// import authHeader from "../../services/authHeader";
 
 export const apiPriorAuthSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://localhost:44394/api/priorAuth",
     prepareHeaders(headers) {
-      headers.set(authHeader);
+      const token = localStorage.getItem("token");
+      headers.set("authorization", `Bearer ${token}`);
       return headers;
     },
   }),

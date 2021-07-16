@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 // Redux
-// import { store } from "store";
+import { store } from "./store";
 
 // Styling
 import clsx from "clsx";
@@ -192,6 +192,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
+  const dispatch = store.dispatch;
+
   const classes = useStyles();
   const [user, setUser] = useState();
   const [open, setOpen] = useState(false);
