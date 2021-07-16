@@ -128,7 +128,7 @@ export default function SpecialtyTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Specialties"
                 subtitle="List of available Specialties/Therapies"
@@ -213,7 +213,7 @@ export default function SpecialtyTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

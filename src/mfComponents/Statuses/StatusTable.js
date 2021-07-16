@@ -128,7 +128,7 @@ export default function ProviderTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Statuses"
                 subtitle="List of Statuses assignable to Prior Authorizations"
@@ -217,7 +217,7 @@ export default function ProviderTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

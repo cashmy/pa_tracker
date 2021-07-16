@@ -191,7 +191,7 @@ export default function PAByCarrier() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title={`Prior Authorizations for Carrier:   ${carrierShortName} - ${carrierName}`}
                 subtitle="List of all PA's for a given provider. ----- (Use switch to toggle between active and archived.)"
@@ -299,7 +299,7 @@ export default function PAByCarrier() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

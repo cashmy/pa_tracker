@@ -168,7 +168,7 @@ export default function ProviderTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Prior Authorizations"
                 subtitle="List of all Prior Authorizations. ----- (Use switch to toggle between active and archived.)"
@@ -280,7 +280,7 @@ export default function ProviderTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

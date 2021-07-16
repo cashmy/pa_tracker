@@ -91,7 +91,7 @@ export default function PatientForm(props) {
      }, [recordForEdit], setValues)
     
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Patient"
                 subtitle="Add/Edit Patient Information"
@@ -186,6 +186,6 @@ export default function PatientForm(props) {
                     </Grid>
                 </Form>
             </Paper>
-        </>
+        </React.Fragment>
     )
 }

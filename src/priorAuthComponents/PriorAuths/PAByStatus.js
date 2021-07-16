@@ -193,7 +193,7 @@ export default function PAByStatus() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeaderBgClr
                 title={`Prior Authorizations for Status:   ${statusTitle}`}
                 subtitle="List of all PA's for a given status. ----- (Use switch to toggle between active and archived.)"
@@ -300,7 +300,7 @@ export default function PAByStatus() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

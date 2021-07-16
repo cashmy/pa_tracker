@@ -148,7 +148,7 @@ export default function ProviderTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Diagnosis Codes"
                 subtitle="List of ICD-10 Diagnosis Codes & Descriptions"
@@ -244,7 +244,7 @@ export default function ProviderTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

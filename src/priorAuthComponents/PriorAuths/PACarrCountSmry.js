@@ -85,7 +85,7 @@ const columns = [
     }
         
     return (
-        <>
+        <React.Fragment>
             <Paper className={classes.pageContent}>
                 <div style={{ height: 350, width: '100%' }}>
                     <DataGrid
@@ -103,6 +103,6 @@ const columns = [
                     />
                 </div>
             </Paper >
-        </>
+        </React.Fragment>
     );
 }

@@ -87,7 +87,7 @@ export default function PAProvCountSmry() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <Paper className={classes.pageContent}>
                 <div style={{ height: 350, width: '100%' }}>
                     <DataGrid
@@ -105,6 +105,6 @@ export default function PAProvCountSmry() {
                     />
                 </div>
             </Paper >
-        </>
+        </React.Fragment>
     );
 }

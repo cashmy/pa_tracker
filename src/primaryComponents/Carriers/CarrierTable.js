@@ -137,7 +137,7 @@ export default function CarrierTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Carriers"
                 subtitle="List of available Insurance Carrier"
@@ -227,7 +227,7 @@ export default function CarrierTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

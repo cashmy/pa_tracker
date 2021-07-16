@@ -147,7 +147,7 @@ export default function CPTCodeTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="CPT Codes"
                 subtitle="List of Current Procedural Terminology (CPT) Codes"
@@ -243,7 +243,7 @@ export default function CPTCodeTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

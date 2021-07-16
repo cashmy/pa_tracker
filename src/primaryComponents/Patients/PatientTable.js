@@ -201,7 +201,7 @@ export default function DataGridDemo() {
   }
 
   return (
-    <>
+    <React.Fragment>
       <PageHeader
         title="Patients"
         subtitle="List of patients"
@@ -242,6 +242,6 @@ export default function DataGridDemo() {
           confirmDialog={confirmDialog}
           setConfirmDialog={setConfirmDialog}
       />
-    </>
+    </React.Fragment>
   );
 }

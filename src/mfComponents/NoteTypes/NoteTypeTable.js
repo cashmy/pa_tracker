@@ -130,7 +130,7 @@ export default function NoteTypeTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Note Types"
                 subtitle="List of all descriptions to classify Prior Authorization Notes"
@@ -216,7 +216,7 @@ export default function NoteTypeTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

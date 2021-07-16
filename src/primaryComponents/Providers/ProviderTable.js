@@ -135,7 +135,7 @@ export default function ProviderTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Providers"
                 subtitle="List of available Provider/Therapists"
@@ -224,7 +224,7 @@ export default function ProviderTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

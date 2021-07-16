@@ -130,7 +130,7 @@ export default function ClinicTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Clinics"
                 subtitle="List of available clinics"
@@ -215,7 +215,7 @@ export default function ClinicTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }

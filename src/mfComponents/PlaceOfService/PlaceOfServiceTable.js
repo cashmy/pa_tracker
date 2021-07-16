@@ -126,7 +126,7 @@ export default function ProviderTable() {
     }
 
     return (
-        <>
+        <React.Fragment>
             <PageHeader
                 title="Places of Services"
                 subtitle="List of commonly used Places of Service descriptions"
@@ -211,7 +211,7 @@ export default function ProviderTable() {
                 confirmDialog={confirmDialog}
                 setConfirmDialog={setConfirmDialog}
             />
-        </>
+        </React.Fragment>
     )
 
 }
